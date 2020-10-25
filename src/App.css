@@ -1,0 +1,273 @@
+@import url(//db.onlinewebfonts.com/c/e5d18e657f83f8750cd54c899de3a38b?family=Biko);
+@font-face {font-family: "Biko"; src: url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.eot"); src: url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.woff") format("woff"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.svg#Biko") format("svg"); }
+
+body{
+    background: url('/static/img/bg.png');
+
+}
+.headTitle{
+    font-family: Biko;
+    color: white;
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+.nav{
+/* height: 42px; */
+border-radius: 10px 10px 0px 0px;
+background-color: #034BB7;
+}
+
+nav{
+    /* height: 42px; */
+    background-color: #034BB7;
+    }
+input[type="text"]{
+    border-radius: 30px;
+    border: 2px solid #288df0;
+    height: 38px;
+    background-color: rgb(245, 245, 245);
+}
+
+.textarea{
+    background-color: rgb(245, 245, 245);
+}
+
+.selectStyle{
+    
+    border-radius: 30px;
+    border: 2px solid #288df0;
+    height: 38px;
+    background-color: rgb(245, 245, 245);
+}
+
+.card{
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 1px 10px #00000029;
+    border-radius: 10px;
+    opacity: 1;
+}
+.btnBlue{
+    max-width: 133px;
+    width: 133px;
+    /* height: 40%; */
+    border-radius: 30px;
+    background-color: #034BB7;
+    color: white;    
+    border: none;
+    margin-right: 10px;
+    margin-left: 30px;
+    margin-top: 10px;
+    box-shadow: 0px 10px 10px #00000029;
+}
+
+.btnBlue:hover{
+    background-color: #21234E;
+    color: white;    
+    border: none;
+}
+.col-form-label{
+    text-transform: capitalize;
+    font-family: Gill Sans;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: -webkit-right;
+}
+
+
+input:required {
+    /* border: 1px dashed green; */
+    border-radius: 16px;
+  }
+
+  input:invalid {
+      
+    /* border: 1px dashed transparent;s */
+    border-radius: 20px;
+  }
+  input:required:focus:valid {
+    background: url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg") no-repeat 95% 50% lightgreen;
+    background-size: 25px;
+
+  }
+  input:focus:invalid {
+    background: url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg") no-repeat 95% 50% lightsalmon;
+    background-size: 25px;
+  }
+
+
+  @media screen and (max-width: 480px) {
+    .btnBlue{
+        max-width: 133px;
+        width: 133px;
+        height: 40px;
+        border-radius: 30px;
+        background-color: #034BB7;
+        color: white;    
+        border: none;
+        margin-right: 10px;
+        margin-left: 30px;
+        margin-top: 10px;
+        box-shadow: 0px 10px 10px #00000029;
+        /* font-size: small; */
+        font: initial;
+    }
+    
+
+  }
+
+
+/*nav*/
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #011fc7;
+    padding: 5px 15px;
+    background-color: #304ffe;
+    height: 70px;
+  }
+  header h1 {
+    margin-right: auto;
+    padding: 0;
+  }
+  header h1 a {
+    display: block;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  header h1 a img {
+    height: 50px;
+    margin-top: 7px;
+  }
+  
+  .custom-navbar {
+    margin: 0;
+    padding: 0;
+  }
+  .custom-navbar li {
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
+    vertical-align: middle;
+  }
+  .custom-navbar li a {
+    display: block;
+    font-size: 17px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 15px;
+  }
+  .custom-navbar li a:hover {
+    background-color: #637afe;
+    color: #f2f2f2;
+  }
+  
+  .menu-icon {
+    display: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    text-align: center;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+  }
+  .menu-icon:hover {
+    background-color: #637afe;
+  }
+  .menu-icon:focus {
+    outline: none;
+  }
+  .menu-icon span {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .ripple-wave {
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+  }
+  .ripple-wave:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform-style: flat;
+    transform: translate3d(-50%, -50%, 0);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100%;
+    transition: width .3s ease, height .3s ease;
+  }
+  .ripple-wave:focus, .ripple-wave:hover {
+    background: #fb512e;
+  }
+  .ripple-wave:active:after {
+    width: 200px;
+    height: 200px;
+  }
+  
+  @media (min-width: 481px) and (max-width: 761px) {
+    header {
+      position: relative;
+    }
+    header h1 {
+      margin: 0 auto;
+    }
+  }
+  @media (max-width: 480px) {
+    header h1 {
+      margin-right: auto;
+    }
+  }
+  @media (max-width: 991px) {
+    header {
+      position: relative;
+    }
+  
+    .custom-navbar {
+      opacity: 0;
+      position: fixed;
+      z-index: 2;
+      top: 70px;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      max-width: 300px;
+      width: 100%;
+      background-color: #304ffe;
+      transition: all 1s ease;
+    }
+    .custom-navbar.open {
+      opacity: 1;
+      right: 0;
+    }
+    .custom-navbar li {
+      display: block;
+    }
+    .custom-navbar li a {
+      text-align: left;
+      border: 1px solid #637afe;
+    }
+  
+    .menu-icon {
+      display: block;
+    }
+  }
+  
+

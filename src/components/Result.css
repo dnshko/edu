@@ -1,0 +1,22 @@
+.btnResult {
+    width: 177px;
+height: 50px;
+background: #034BB7;
+border-radius: 30px;
+border: none;
+opacity: 1;
+/* margin-top: 20px; */
+margin-right: 20px;
+margin-top: 20px;
+
+  }
+
+.btnResult:hover {
+    
+    width: 177px;
+    height: 50px;
+    background: #21234E;
+    border-radius: 30px;
+    opacity: 1;
+    border: none;
+  }
