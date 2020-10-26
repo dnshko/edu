@@ -10,6 +10,7 @@ class Header extends Component{
         return(
                 <>
                 
+                
         <nav className="mb-1 navbar navbar-expand-lg navbar-dark" style={{color : '#034BB7'}} >
              <a className="navbar-brand" href="#">
                <img src="/static/img/padidatools.png" height="30" alt="mdb logo" />
@@ -20,9 +21,13 @@ class Header extends Component{
               </button>
               <div className="collapse navbar-collapse" id="navbarSupportedContent-4">
                   <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to="/add" className="nav-link"> Add Client</Link>
+                    </li>
                    <li className="nav-item">
                     <Link to="/" className="nav-link"> ClientSignup</Link>
-                    </li><li className="nav-item">
+                    </li>
+                    <li className="nav-item">
                     <Link to="/admin"> <p className="nav-link" >ClientAdmin</p></Link>
                     </li><li className="nav-item">
                     <Link to="/students"> <p className="nav-link" >ManageStudents</p></Link>
