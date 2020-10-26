@@ -19,6 +19,7 @@ class ClientSignup extends Component{
         super();
     
         this.state = {
+        ClientId: null,
         ClientName: '',
         first_name: '',
         middle_name: '',
@@ -77,6 +78,8 @@ class ClientSignup extends Component{
          const filterData =  head(this.getClientName(this.state.client,e.target.value))
           console.log(filterData)
             this.setState({
+                ClientId: pathOr("",["id"],filterData),
+                ClientName:  pathOr("",["ClientName"],filterData),
                 first_name: pathOr("",["first_name"],filterData),
                 middle_name:pathOr("",["middle_name"],filterData),
                 last_name: pathOr("",["last_name"],filterData),
@@ -91,11 +94,11 @@ class ClientSignup extends Component{
                 zipcode: pathOr("",["zipcode"],filterData),
                 country: pathOr("",["country"],filterData)
             })
-            console.log(this.state.client,'client')
+            // console.log(this.state.client,'client')
             
-            console.log(e.target.value,'ClientName1')
+            // console.log(e.target.value,'ClientName1')
             
-            console.log(this.getClientName(this.state.client,e.target.value),'client fn')
+            // console.log(this.getClientName(this.state.client,e.target.value),'client fn')
             return
 
         }
@@ -128,6 +131,32 @@ class ClientSignup extends Component{
               });
               
       }
+      onUpdate =() =>{
+        const {ClientId, ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
+        
+        axios.put('http://localhost:8000/client/'  + ClientId + '/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
+        .then(function (response) {
+              //access the results here....           
+            swal("success!", "Admin Updated", "success");// alert
+            console.log(response);// log
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      onDelete = () =>{
+        const {ClientId} = this.state;
+        
+        axios.delete('http://localhost:8000/client/'  + ClientId + '/')                   
+        .then(function (response) {
+              //access the results here....           
+            swal("success!", "Admin deleted", "success");// alert
+            console.log(response);// log
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+     }
     render(){
         const { ClientName,clientNameError,errortext, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country } = this.state;
         const optionObj =[
@@ -367,8 +396,8 @@ class ClientSignup extends Component{
                         </Row>
                         <Row className="row justify-content-md-center">
                                         <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
-                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" />    
-                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
                                         <CustomButton  style="col btnBlue" BtnTxt="Cancel" />    
                                                               
                          </Row>
