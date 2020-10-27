@@ -1,16 +1,14 @@
-heroku:
+Backend development workflow
 
-git init
+virtualenv env
+env\Scripts\activate
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 
-heroku git:remote -a edu-test-tool
-
-heroku buildpacks:set heroku/python
 
 
-heroku buildpacks:add --index 1 heroku/nodejs
-
-firebase:
-npm install -g firebase-tools
-firebase login
-firebase init
-firebase deploy
+Frontend development workflow
+npm i
+npm start
