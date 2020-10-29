@@ -69,42 +69,9 @@ class ClientAdd extends Component{
       
       
     onChange = (e) => {
-        //to get the input based on name and value
-        // if(equals(e.target.name,"ClientName")){
-                
-              
-          
-          
-        //  const filterData =  head(this.getClientName(this.state.client,e.target.value))
-        //   console.log(filterData)
-        //     this.setState({
-        //         ClientId: pathOr("",["id"],filterData),
-        //         ClientName:  pathOr("",["ClientName"],filterData),
-        //         first_name: pathOr("",["first_name"],filterData),
-        //         middle_name:pathOr("",["middle_name"],filterData),
-        //         last_name: pathOr("",["last_name"],filterData),
-        //         email: pathOr("",["email"],filterData),
-        //         mobile: pathOr("",["mobile"],filterData),
-        //         persion: pathOr("",["persion"],filterData),
-        //         mobile1: pathOr("",["mobile1"],filterData),
-        //         license_key: pathOr("",["license_key"],filterData),
-        //         address: pathOr("",["address"],filterData),
-        //         city: pathOr("",["city"],filterData),
-        //         state: pathOr("",["state"],filterData),
-        //         zipcode: pathOr("",["zipcode"],filterData),
-        //         country: pathOr("",["country"],filterData)
-                
-        //     })
-            // console.log(this.state.client,'client')
-            
-            // console.log(e.target.value,'ClientName1')
-            
-            // console.log(this.getClientName(this.state.client,e.target.value),'client fn')
-            // return
-
+        
             this.setState({ [e.target.name]: e.target.value });
        
-        // console.log(e.target.value,'value')
         
         
     }
@@ -113,14 +80,7 @@ class ClientAdd extends Component{
         // get our form data out of state
         const { ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
         
-        // if(isEmpty(ClientName) ){
-        //     this.setState({clientNameError : true,errortext:'name cannot be empty'})
-        //     return
-        // }
-        //  this.setState({clientNameError : false,errortext:''})
-
-       
-
+        
         axios.post('http://localhost:8000/client/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
             .then(function (response) {
                   //access the results here....           
@@ -235,18 +195,7 @@ class ClientAdd extends Component{
                                             onChange={this.onChange}
                                             name="ClientName"
                                             />
-                                         {/* {(clientNameError) ? (<span>{errortext}</span>) : null} */}
-                                         {/* <Form.Control as="select" custom className="selectStyle" id="Client Name" defaultValue={'ClientName'} name="ClientName"  onChange={this.onChange} required>
-                                            <option value="ClientName" disabled selected>ClientName</option>                                            
-                                            
-                                            { this.state.client.map(client =>
-                                             <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}
-                                                  
-                                        </Form.Control> */}
-{/* <input list="browsers" name="myBrowser" />
-<datalist id="browsers">
-  <option value="Chrome" />
-</datalist> */}
+               
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} >
@@ -397,9 +346,7 @@ class ClientAdd extends Component{
                         </Row>
                         <Row className="row justify-content-md-center">
                                         <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
-                                        {/* <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
-                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete} />
-                                        <CustomButton  style="col btnBlue" BtnTxt="Cancel" />     */}
+      
                                                               
                          </Row>
                     </Card.Body>                    

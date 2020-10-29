@@ -45,7 +45,7 @@ class ClientSignup extends Component{
           .then(res => {
             const client = res.data;
             this.setState({ client });           
-        //   console.log(client)
+          console.log(client)
           })
       }
      getClientName = (client,client_name)=>{
@@ -94,16 +94,11 @@ class ClientSignup extends Component{
                 zipcode: pathOr("",["zipcode"],filterData),
                 country: pathOr("",["country"],filterData)
             })
-            // console.log(this.state.client,'client')
-            
-            // console.log(e.target.value,'ClientName1')
-            
-            // console.log(this.getClientName(this.state.client,e.target.value),'client fn')
             return
 
         }
         this.setState({ [e.target.name]: e.target.value });
-        // console.log(e.target.value,'value')
+        console.log(e.target.value,'value')
         
         
     }
@@ -112,14 +107,19 @@ class ClientSignup extends Component{
         // get our form data out of state
         const { ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
         
-        // if(isEmpty(ClientName) ){
-        //     this.setState({clientNameError : true,errortext:'name cannot be empty'})
-        //     return
-        // }
-        //  this.setState({clientNameError : false,errortext:''})
-
-       
-
+         if(isEmpty(mobile)){
+             
+            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if(mobile.value.match(phoneno))
+            {
+                this.setState({clientNameError : false,errortext:''})
+            }
+            else
+            {
+            this.setState({clientNameError : true,errortext:'phone number format incorrect'})
+            }
+        
+            
         axios.post('http://localhost:8000/client/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
             .then(function (response) {
                   //access the results here....           
@@ -131,6 +131,7 @@ class ClientSignup extends Component{
               });
               
       }
+    }
       onUpdate =() =>{
         const {ClientId, ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
         
@@ -147,15 +148,34 @@ class ClientSignup extends Component{
       onDelete = () =>{
         const {ClientId} = this.state;
         
-        axios.delete('http://localhost:8000/client/'  + ClientId + '/')                   
-        .then(function (response) {
+       // axios.delete('http://localhost:8000/client/'  + ClientId + '/')                   
+        //.then(function (response) {
               //access the results here....           
-            swal("success!", "Admin deleted", "success");// alert
-            console.log(response);// log
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            //swal("success!", "Admin deleted", "success");// alert
+            //console.log(response);// log
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete('http://localhost:8000/client/'  + ClientId + '/') 
+                  swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Your imaginary file is safe!");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+               })
+
+         
      }
     render(){
         const { ClientName,clientNameError,errortext, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country } = this.state;
@@ -219,7 +239,7 @@ class ClientSignup extends Component{
             <Card className="card">
                  <nav className="nav justify-content-center"
                         style={{backgroundColor: '#034BB7', borderRadius: '10px 10px 0px 0px'}}>
-                        <p className="headTitle">Client Signup</p>
+                        <p className="headTitle">Manage Clients</p>
                  </nav>
                  <Form >          
                     <Card.Body className="card-body">
@@ -228,13 +248,6 @@ class ClientSignup extends Component{
                                 <Form.Group as={Row} >
                                     <Form.Label htmlFor="Client Name" className="col col-form-label">Client Name</Form.Label>
                                     <Col >
-                                        {/* <Form.Control type="text"  id="Client Name" required
-                                            placeholder="Enter The Client Name" 
-                                            value={ClientName}
-                                            onChange={this.onChange}
-                                            name="ClientName"
-                                            />
-                                         {(clientNameError) ? (<span>{errortext}</span>) : null} */}
                                          <Form.Control as="select" custom className="selectStyle" id="Client Name" defaultValue={'ClientName'} name="ClientName"  onChange={this.onChange} required>
                                             <option value="ClientName" disabled selected>ClientName</option>                                            
                                             
@@ -242,6 +255,7 @@ class ClientSignup extends Component{
                                              <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}
                                                   
                                         </Form.Control>
+
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} >
@@ -298,6 +312,7 @@ class ClientSignup extends Component{
                                          onChange={this.onChange} 
                                          name="mobile"
                                          />
+                                         {(clientNameError) ? (<span>{errortext}</span>) : null}
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row}>

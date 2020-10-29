@@ -25,7 +25,7 @@ class Header extends Component{
                     <Link to="/add" className="nav-link"> Add Client</Link>
                     </li>
                    <li className="nav-item">
-                    <Link to="/" className="nav-link"> ClientSignup</Link>
+                    <Link to="/" className="nav-link"> Manage Clients</Link>
                     </li>
                     <li className="nav-item">
                     <Link to="/admin"> <p className="nav-link" >ClientAdmin</p></Link>
