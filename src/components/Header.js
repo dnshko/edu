@@ -38,6 +38,12 @@ class Header extends Component{
                     </li><li className="nav-item">
                     <Link to="/assigntest"> <p className="nav-link" >AssignTest</p></Link>
                     </li>
+                    <li className="nav-item">
+                    <Link to="/Steps"> <p className="nav-link" >View Steps</p></Link>
+                    </li>
+                    <li className="nav-item">
+                    <Link to="/Viewvideo"> <p className="nav-link" >View Video</p></Link>
+                    </li>
                  </ul>
               </div>
         </nav>

@@ -8,7 +8,8 @@ import ManageTeachers from './containers/Client/ManageTeachers/ManageTeachers ';
 import AdminClassroom from './containers/Client/Admin Classroom/AdminClassroom';
 import AssignTest from './containers/Client/AssignTest/AssignTest';
 import QuizApp from './QuizApp';
-
+import Steps from './Steps';
+import Viewvideo from './Viewvideo';
 
 const BaseRouter = () => (
   <>
@@ -19,6 +20,8 @@ const BaseRouter = () => (
     <Route path="/adminclassroom" component={AdminClassroom} />
     <Route path="/assigntest" component={AssignTest} />
     <Route path="/add" component={ClientAdd} />
+    <Route path="/Steps" component={Steps} />
+    <Route path="/Viewvideo" component={Viewvideo} />
     <Route path="/quizapp" component={QuizApp} />
   </>
 );
