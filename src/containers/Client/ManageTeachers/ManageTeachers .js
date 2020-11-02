@@ -86,6 +86,7 @@ class  ManageTeachers  extends Component{
                           ClientId: pathOr("",["id"],filterData),
                           Select_Teacher: pathOr("",["Select_Teacher"],filterData),
                           Prefix: pathOr("",["Prefix"],filterData),
+                          First_Name: pathOr("",["First_Name"],filterData),
                           Middle_Name: pathOr("",["Middle_Name"],filterData),
                           Last_Name: pathOr("",["Last_Name"],filterData),
                           Email: pathOr("",["Email"],filterData),
@@ -156,10 +157,10 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlfor="Select_Teacher" class="col col-form-label">select teacher</Form.Label>
                                 <Col>
-                                    <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Select_Teacher"  onChange={this.onChange} required>
+                                    <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Select_Teacher"  onChange={this.onChange} >
                                     <option value="" disabled selected>select Teacher</option>
                                         { this.state.teachers.map(teachers =>
-                                             <option key={teachers.id} value={Teacher => teachers.First_Name}>{teachers.First_Name}</option>)}    
+                                             <option key={teachers.id} value={ teachers.First_Name}>{teachers.First_Name}</option>)}    
                                     </Form.Control>
                                    
                                 </Col>
@@ -167,12 +168,15 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="prefix" class="col col-form-label">prefix</Form.Label>
                                 <Col >
-                                    <select class="selectStyle" id="prefix">
-                                        <option selected disabled>prefix</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                   
+                                     <Form.Control as="select" custom className="selectStyle" id="prefix" name="prefix"  onChange={this.onChange} required>
+                                        <option value="prefix" disabled selected>prefix</option>
+                                       <option value="1">Dr.</option>
+                                        <option value="2">Mr.</option>
+                                        <option value="3">Mrs.</option>
+                                        <option value="3">Ms</option>
+                                    </Form.Control>
+                                  
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -266,12 +270,13 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label for="relationship" class="col col-form-label">Relationship 1</Form.Label>
                                 <Col>
-                                    <select class="selectStyle" id="inputGroupSelect01">
-                                        <option selected disabled>Relationship 1</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_1" onChange={this.onChange} required>
+                                        <option value="Relationship_1"selected disabled>relationship 1</option>
+                                        <option value="father1">father</option>
+                                        <option value="mother">mother</option>
+                                        <option value="relative ">relative </option>
+                                        <option value="relative ">friend</option>
+                                    </Form.Control>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -301,12 +306,13 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label for="relationship 2" class="col col-form-label">Relationship 2</Form.Label>
                                 <Col>
-                                    <select class="selectStyle" id="relationship 2">
-                                        <option selected disabled>relationship 2</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                   <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_2" onChange={this.onChange} required>
+                                        <option value="Relationship_2"selected disabled>relationship 1</option>
+                                        <option value="father1">father</option>
+                                        <option value="mother">mother</option>
+                                        <option value="relative ">relative </option>
+                                        <option value="relative ">friend</option>
+                                    </Form.Control>
                                 </Col>
                             </Form.Group>
                         </Col>
@@ -390,9 +396,9 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label for="currently teaching" class="col col-form-label">currently teaching</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="checkedValue" label="academy / magnet / cbse schools"                                         
-                                        value={Currently_Teaching}                                          
+                                    <Form.Check type="checkbox" class="form-check-input"  id=""
+                                        value="academy / magnet / cbse schools" label="academy / magnet / cbse schools"                                         
+                                                                              
                                         onChange={this.onChange} 
                                         name="Currently_Teaching"
                                         required
@@ -426,14 +432,14 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label for="high degree" class="col col-form-label">high degree completed</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="1" label="undergraduate" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="2" label="master" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="doctorate" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id="" 
-                                        value="3" label="credentials" />
+                                    <Form.Check type="checkbox" class="form-check-input" name="High_Degree_Completed" id=""
+                                        value="undergraduate" label="undergraduate" onChange={this.onChange}/>
+                                    <Form.Check type="checkbox" class="form-check-input" name="High_Degree_Completed" id=""
+                                        value="master" label="master" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="High_Degree_Completed" id=""
+                                        value="doctorate" label="doctorate" onChange={this.onChange}/>
+                                    <Form.Check type="checkbox" class="form-check-input" name="High_Degree_Completed" id="" 
+                                        value="credentials" label="credentials" onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
                         </Col>

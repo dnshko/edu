@@ -128,9 +128,9 @@ class StudentProfile(models.Model):
         return self.Select_Student
 
 class AdminClassroomAssignments(models.Model):
-    Select_Teacher =models.ForeignKey(TeacherProfile , null=True, on_delete = models.SET_NULL)
+    Select_Teacher =models.CharField(max_length=265, null=True, blank=True)
     Courses_Taught = models.CharField(max_length=265, null=True, blank=True)
-    Select_Students = models.ForeignKey(StudentProfile , null=True, on_delete = models.SET_NULL)
+    Select_Students = models.CharField(max_length=265, null=True, blank=True)
 
     def __str__(self):
         return self.Select_Teacher

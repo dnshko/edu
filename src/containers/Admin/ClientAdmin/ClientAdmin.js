@@ -159,7 +159,7 @@ class ClientAdmin extends Component{
                                             <option value="ClientName" disabled selected>ClientName</option>                                            
                                             
                                             { this.state.client.map(client =>
-                                             <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}
+                                             <option key={client.id} value={ client.ClientName}>{client.ClientName}</option>)}
                                                   
                                 </Form.Control>
                                 </Col>

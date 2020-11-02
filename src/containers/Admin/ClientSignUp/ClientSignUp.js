@@ -159,7 +159,7 @@ class ClientSignup extends Component{
                     axios.delete('http://localhost:8000/client/'  + ClientId + '/') 
                   swal("Client Record deleted!", {
                     icon: "success",
-                  });
+                  }).then(setInterval(function(){window.location.reload();},2000));
                 } else {
                   swal("Client Record safe!");
                 }
@@ -243,7 +243,7 @@ class ClientSignup extends Component{
                                             <option value="ClientName" disabled selected>ClientName</option>                                            
                                             
                                             { this.state.client.map(client =>
-                                             <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}
+                                             <option key={client.id} value={ client.ClientName}>{client.ClientName}</option>)}
                                                   
                                         </Form.Control>
 

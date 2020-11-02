@@ -439,11 +439,12 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="relationship" className="col col-form-label">Relationship 1</Form.Label>
                                 <Col>
-                                    <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_1" value={Relationship_1} onChange={this.onChange} required>
-                                        <option selected disabled>relationship 1</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_1" onChange={this.onChange} required>
+                                        <option value="Relationship_1"selected disabled>relationship 1</option>
+                                        <option value="father1">father</option>
+                                        <option value="mother">mother</option>
+                                        <option value="relative ">relative </option>
+                                        <option value="relative ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -476,11 +477,12 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="relationship" className="col col-form-label">Relationship 2</Form.Label>
                                 <Col>
-                                    <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_2" required>
-                                        <option selected disabled>Relationship 2</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <Form.Control as="select" custom className="selectStyle" id="relationship" name="Relationship_2" required defaultValue={'DEFAULT'} value={Relationship_2} onChange={this.onChange} >
+                                        <option value="DEFAULT" selected disabled>Relationship 2</option>
+                                        <option value="father1">father</option>
+                                        <option value="mother">mother</option>
+                                        <option value="relative ">relative </option>
+                                        <option value="relative ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
