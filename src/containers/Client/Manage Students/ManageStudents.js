@@ -717,9 +717,9 @@ class ManageStudents extends Component{
                         </Col>
                     </Row>
                             <Row className="row justify-content-md-center">            
-                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
-                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
-                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Student" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Student" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Student" ClickEvent={this.onDelete}/>
                                         <CustomButton  style="col btnBlue" BtnTxt="Cancel" />                                       
                             </Row>
                 </Card.Body>

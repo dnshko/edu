@@ -397,9 +397,9 @@ class ClientSignup extends Component{
                             </Col>                            
                         </Row>
                         <Row className="row justify-content-md-center">
-                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
-                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
-                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Client" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Client" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Client" ClickEvent={this.onDelete}/>
                                         <CustomButton  style="col btnBlue" BtnTxt="Cancel" />    
                                                               
                          </Row>

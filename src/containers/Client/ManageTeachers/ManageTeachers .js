@@ -139,6 +139,95 @@ class  ManageTeachers  extends Component{
                 console.log(error);
               });
       }
+      onUpdate =() =>{
+        const { 
+            ClientId,
+            Select_Teacher,
+            Prefix,
+            First_Name,
+            Middle_Name,
+            Last_Name,
+            Email,
+            Mobile,
+            Emergency_Contact_Person1,
+            Emergency_Mobile1,
+            Relationship_1,
+            Emergency_Contact_Person2,
+            Emergency_Mobile2 ,
+            Relationship_2,
+            Address,
+            City ,
+            State ,
+            Zip_Code,
+            Country,
+            School_District,
+            Currently_Teaching,
+            Ap_Classess,
+            Notes_Comments,
+            High_Degree_Completed,
+            Grade_Level,
+            Speciality,       
+          } = this.state;
+
+        axios.put('http://localhost:8000/teacher/'  + ClientId + '/', {
+            Select_Teacher,
+            Prefix,
+            First_Name,
+            Middle_Name,
+            Last_Name,
+            Email,
+            Mobile,
+            Emergency_Contact_Person1,
+            Emergency_Mobile1,
+            Relationship_1,
+            Emergency_Contact_Person2,
+            Emergency_Mobile2 ,
+            Relationship_2,
+            Address,
+            City ,
+            State ,
+            Zip_Code,
+            Country,
+            School_District,
+            Currently_Teaching,
+            Ap_Classess,
+            Notes_Comments,
+            High_Degree_Completed,
+            Grade_Level,
+            Speciality,             
+        })  
+        .then(function (response) {
+              //access the results here....           
+            swal("success!", "Admin Updated", "success");// alert
+            console.log(response);// log
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      onDelete = () =>{
+        const {ClientId} = this.state;
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Record file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete('http://localhost:8000/teacher/'  + ClientId + '/') 
+                  swal("Client Record Deleted!", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Client Record is safe!");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+               })
+            }
     render(){
         const { Select_Teacher,Prefix,First_Name,Middle_Name,Last_Name,Email,Mobile,Emergency_Contact_Person1,Emergency_Mobile1,Relationship_1, Emergency_Contact_Person2,Emergency_Mobile2,Relationship_2,Address,City,State,Zip_Code,Country,School_District,Currently_Teaching,Ap_Classess, Notes_Comments,High_Degree_Completed,Grade_Level,Speciality } = this.state;
         return(
@@ -487,9 +576,9 @@ class  ManageTeachers  extends Component{
                         </Col>
                     </Row>
                         <Row className="row justify-content-md-center">
-                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
-                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
-                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Teacher " ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Teacher " ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Teacher " ClickEvent={this.onDelete}/>
                                         <CustomButton  style="col btnBlue" BtnTxt="Cancel" />                             
                          </Row>
                 </Card.Body>

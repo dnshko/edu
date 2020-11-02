@@ -345,7 +345,7 @@ class ClientAdd extends Component{
                             </Col>                            
                         </Row>
                         <Row className="row justify-content-md-center">
-                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Client" ClickEvent={this.onSubmit} />
       
                                                               
                          </Row>
