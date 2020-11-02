@@ -82,18 +82,18 @@ class TeacherProfile(models.Model):
 
 
 class StudentProfile(models.Model):
-    PREFIX = (
-        ('Dr.','Dr.'),
-        ('Mr.','Mr.'),
-        ('Mrs.','Mrs.'),
-        ('Ms.','Ms')
-    )
-    RELATIONSHIP = (
-        ('Father','Father'),
-        ('Mother','Mother'),
-        ('Relative','Relative '),
-        ('Friend','Friend')
-    )
+    # PREFIX = (
+    #     ('Dr.','Dr.'),
+    #     ('Mr.','Mr.'),
+    #     ('Mrs.','Mrs.'),
+    #     ('Ms.','Ms')
+    # )
+    # RELATIONSHIP = (
+    #     ('Father','Father'),
+    #     ('Mother','Mother'),
+    #     ('Relative','Relative '),
+    #     ('Friend','Friend')
+    # )
     Select_Student =  models.CharField(max_length=265, null=True, blank=True)
     Student_First_Name =  models.CharField(max_length=265, null=True, blank=True)
     Student_Middle_Name =  models.CharField(max_length=265, null=True, blank=True)
@@ -102,10 +102,10 @@ class StudentProfile(models.Model):
     Student_Mobile =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Contact_Person1 =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Mobile1 =  models.CharField(max_length=265, null=True, blank=True)
-    Relationship_1 =  models.CharField(max_length=265, null=True, blank=True , choices=RELATIONSHIP)
+    Relationship_1 =  models.CharField(max_length=265, null=True, blank=True )
     Emergency_Contact_Person2 =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Mobile2 =  models.CharField(max_length=265, null=True, blank=True)
-    Relationship_2 =  models.CharField(max_length=265, null=True, blank=True, choices=RELATIONSHIP)
+    Relationship_2 =  models.CharField(max_length=265, null=True, blank=True)
     Student_Address = models.CharField(max_length=265, null=True, blank=True)
     City =  models.CharField(max_length=265, null=True, blank=True)
     State =  models.CharField(max_length=265, null=True, blank=True)

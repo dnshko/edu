@@ -362,11 +362,23 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="first name" className="col col-form-label">Student First Name</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="first name"
-                                     placeholder="Client Name"
-                                                                       
+                                     placeholder="Student First Name"                                                                       
                                     value={Student_First_Name}                                          
                                     onChange={this.onChange} 
                                     name="Student_First_Name"
+                                    required
+                                     />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label htmlFor="Middle_Name" className="col col-form-label">Student Middle Name</Form.Label>
+                                <Col >
+                                    <Form.Control type="text"  id="Middle_Name"
+                                     placeholder="Student Middle Name"
+                                                                       
+                                    value={Student_Middle_Name}                                          
+                                    onChange={this.onChange} 
+                                    name="Student_Middle_Name"
                                     required
                                      />
                                 </Col>
@@ -556,7 +568,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="gate student" className="col col-form-label"></Form.Label>
                                 <Col>
                                     <Form.Check type="checkbox" className="form-check-input"  id="gate student"
-                                         label="gate student" value="gate_student" value={gate_student} onChange={this.onChange}
+                                         label="gate student" value="gate_student" name="gate_student" onChange={this.onChange}
                                          />
                                 </Col>
                             </Form.Group>
@@ -568,7 +580,7 @@ class ManageStudents extends Component{
                                                                       
                                     value={Current_School_Attending}                                          
                                     onChange={this.onChange} 
-                                    name="Current_School attending"
+                                    name="Current_School_Attending"
                                     required
                                     />
                                 </Col>
@@ -640,18 +652,18 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="program" className="col col-form-label">Enroll Program</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox" className="form-check-input" name="" id=""
-                                        value="1" label="ACT" /><br />
-                                    <Form.Check type="checkbox" className="form-check-input" name="" id=""
-                                        value="2" label="SAT" /><br />
-                                    <Form.Check type="checkbox" className="form-check-input" id=""  label="private lessons" name="Enroll_Program"  value={Enroll_Program} onChange={this.onChange}
+                                    <Form.Check type="checkbox" className="form-check-input" name="" id="" onChange={this.onChange} name="Enroll_Program"
+                                        value="ACT" label="ACT" /><br />
+                                    <Form.Check type="checkbox" className="form-check-input" name="" id="" onChange={this.onChange} name="Enroll_Program"
+                                        value="SAT" label="SAT" /><br />
+                                    <Form.Check type="checkbox" className="form-check-input" id=""  label="private lessons" name="Enroll_Program" value="private lessons" onChange={this.onChange}
                                     /><br/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="inputtext3" className="col col-form-label">Aign Teachers</Form.Label>
                                 <Col>
-                                <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Select_Teacher"  onChange={this.onChange} required>
+                                <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Assign_Teachers"  onChange={this.onChange} required>
                                     <option value="" disabled selected>select client</option>
                                         { this.state.teachers.map(teachers =>
                                              <option key={teachers.id} value={Teacher => teachers.First_Name}>{teachers.First_Name}</option>)}    
@@ -663,8 +675,8 @@ class ManageStudents extends Component{
                                 <Col>
                                     <Form.Control as="select" custom className="selectStyle" id="continuing student" name="Continuing_Student" value={Continuing_Student} onChange={this.onChange} required>
                                         <option selected disabled>continuing student</option>
-                                        <option value="1">yes</option>
-                                        <option value="2">no</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -673,20 +685,20 @@ class ManageStudents extends Component{
                                 <Col>
                                     <Form.Control as="select" custom className="selectStyle" id="applied code" name="Discount_Applied_Code" value={Discount_Applied_Code} onChange={this.onChange} required>
                                         <option selected>D0 - None</option>
-                                        <option value="1">D1 - contin</option>
-                                        <option value="2">D2 - vetera</option>
-                                        <option value="2">D3 - physic</option>
-                                        <option value="2">D4 - rural</option>
-                                        <option value="2">D5 - other</option>
+                                        <option value="contin">D1 - contin</option>
+                                        <option value="vetera">D2 - vetera</option>
+                                        <option value="physic">D3 - physic</option>
+                                        <option value="rural">D4 - rural</option>
+                                        <option value="other">D5 - other</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="program" className="col col-form-label">Exit Program</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox"  name="" id=""  value="1" label="ACT" />
-                                    <Form.Check type="checkbox"  name="" id="" value="2" label="SAT" />
-                                    <Form.Check  type="checkbox"  name="" id="" value="3" label="private lessons" name="Exit_Program" onChange={Exit_Program} onChange={this.onChange} />
+                                    <Form.Check type="checkbox"  name="" id=""  value="ACT" label="ACT" name="Exit_Program" onChange={this.onChange} />
+                                    <Form.Check type="checkbox"  name="" id="" value="SAT" label="SAT" name="Exit_Program" onChange={this.onChange} />
+                                    <Form.Check  type="checkbox"  name="" id="" value="private lessons" label="private lessons" name="Exit_Program"  onChange={this.onChange} />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
