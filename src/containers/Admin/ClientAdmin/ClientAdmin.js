@@ -9,20 +9,25 @@ import {
 } from 'react-bootstrap';
 import axios from 'axios';
 import swal from 'sweetalert';
+import CustomButton from '../../../components/Button/Button';
+import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
 
 class ClientAdmin extends Component{
     constructor() {
         super();
     
         this.state = {
+        ClientId: null,
         Client: '',
+        CliendAdmin:'',
         FirstName: '',
         LastName: '',
         Email:'',
         licence:'',
         loginEmail:'',
         password:'',
-        client:[]
+        client:[],
+        admins:[]
       }
     }
       componentDidMount() {
@@ -30,18 +35,62 @@ class ClientAdmin extends Component{
           .then(res => {
             const client = res.data;
             this.setState({ client });
+            console.log(client)
+          })
+          axios.get(`http://localhost:8000/clientadmin/`)
+          .then(res => {
+            const admins = res.data;
+            this.setState({ admins });
+            console.log(admins);
           })
       }
-      onChange = (e) => {
-          //to get the input based on name and value
-          this.setState({ [e.target.name]: e.target.value });
+      
+      getClientAdminName = (admins,client_name)=>{
+        const getClientDeatilsWithName = (data) => {
+      
+          return equals(
+            pathOr(
+              {},
+              [
+                'FirstName'
+              ],
+              data
+            ),
+            client_name
+          )
+              
+        }
+        return filter(getClientDeatilsWithName,admins)
       }
+     
+    onChange = (e) => {
+
+        if(equals(e.target.name,"CliendAdmin")){
+          
+         const filterData =  head(this.getClientAdminName(this.state.admins,e.target.value))
+          console.log(filterData)
+            this.setState({
+                            ClientId: pathOr("",["id"],filterData),
+                            FirstName: pathOr("",["FirstName"],filterData),
+                            LastName:pathOr("",["LastName"],filterData),
+                            Email: pathOr("",["Email"],filterData),
+                            licence: pathOr("",["licence"],filterData),
+                            loginEmail: pathOr("",["loginEmail"],filterData),
+                            password: pathOr("",["password"],filterData),
+                            confirm_password: pathOr("",["confirm_password"],filterData)
+            })
+            return
+        }
+        this.setState({ [e.target.name]: e.target.value });
+        console.log(e.target.value,'value')
+    }
+      
       onSubmit = (e) => {
           e.preventDefault();
           // get our form data out of state
-          const { Client,FirstName, LastName, Email, licence, loginEmail, password } = this.state;
+          const { Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password} = this.state;
   
-          axios.post('http://localhost:8000/clientadmin/', {Client, FirstName, LastName, Email, licence, loginEmail, password })                   
+          axios.post('http://localhost:8000/clientadmin/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})                   
               .then(function (response) {
                     //access the results here....           
                   swal("success!", "Admin added", "success");// alert
@@ -51,9 +100,45 @@ class ClientAdmin extends Component{
                   console.log(error);
                 });
         }
+        onUpdate =() =>{
+            const { ClientId,Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password} = this.state;
+  
+            axios.put('http://localhost:8000/clientadmin/'  + ClientId + '/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})  
+            .then(function (response) {
+                  //access the results here....           
+                swal("success!", "Admin Updated", "success");// alert
+                console.log(response);// log
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
+          onDelete = () =>{
+            const {ClientId} = this.state;
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this Record file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                  })
+                  .then((willDelete) => {
+                    if (willDelete) {
+                        axios.delete('http://localhost:8000/clientadmin/'  + ClientId + '/') 
+                      swal("Client Record Deleted!", {
+                        icon: "success",
+                      });
+                    } else {
+                      swal("Client Record is safe!");
+                    }
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                   })
+                }
     
     render(){
-        const { Client,FirstName, LastName, Email, licence, loginEmail, password } = this.state;
+        const { Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password,clientadmin} = this.state;
         return(
             <>
                 
@@ -70,10 +155,22 @@ class ClientAdmin extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="select client" className="col col-form-label">select client</Form.Label>
                                 <Col >
-                                    <Form.Control as="select" custom className="selectStyle" id="select client" defaultValue={'DEFAULT'}  name="Client" value={Client} onChange={this.onChange} required>
-                                        <option value="DEFAULT" disabled>select client</option>
-                                        { this.state.client.map(client =>
-                                             <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}                              
+                                <Form.Control as="select" custom className="selectStyle" id="Client Name" defaultValue={'ClientName'} name="ClientName"  onChange={this.onChange} required>
+                                            <option value="ClientName" disabled selected>ClientName</option>                                            
+                                            
+                                            { this.state.client.map(client =>
+                                             <option key={client.id} value={Client => client.ClientName}>{client.ClientName}</option>)}
+                                                  
+                                </Form.Control>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label htmlFor="select clientAdmin" className="col col-form-label">select client Admin</Form.Label>
+                                <Col >
+                                    <Form.Control as="select" custom className="selectStyle" id="select clientAdmin"   name="CliendAdmin" onChange={this.onChange} required>
+                                        <option value="" disabled selected>select client</option>
+                                        { this.state.admins.map(admins =>
+                                             <option key={admins.id} value={ClientAdmins => admins.FirstName}>{admins.FirstName}</option>)}                              
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -149,14 +246,26 @@ class ClientAdmin extends Component{
                                      />
                                 </Col>
                             </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label htmlFor="password" className="col col-form-label">confirm password</Form.Label>
+                                <Col>
+                                    <Form.Control type="text"  id="password"
+                                     placeholder="" 
+                                     value={confirm_password}
+                                     onChange={this.onChange}
+                                     name="confirm_password"
+                                     required
+                                     />
+                                </Col>
+                            </Form.Group>
                         </Col>
                     </Row>
                     
-                            <Row className="row justify-content-md-center">                                
-                                    <Button type="submit" className="col btnBlue">Add Admin</Button>                               
-                                    <Button  className="col btnBlue">Update Admin</Button>                                
-                                    <Button  className="col btnBlue">Delete Admin</Button>                                
-                                    <Button  className="col btnBlue">Cancel</Button>                              
+                            <Row className="row justify-content-md-center">            
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Cancel" />                                       
                             </Row>
                 </Card.Body>
             </Form>

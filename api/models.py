@@ -32,6 +32,7 @@ class ClientAdmin(models.Model):
     licence = models.CharField(max_length=265, null=True, blank=True)
     loginEmail = models.CharField(max_length=265, null=True, blank=True)
     password = models.CharField(max_length=265, null=True, blank=True)
+    confirm_password = models.CharField(max_length=265, null=True, blank=True)
 
     def __str__(self):
         return self.FirstName

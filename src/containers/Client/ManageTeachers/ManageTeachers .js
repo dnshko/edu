@@ -10,11 +10,15 @@ import {
 import axios from 'axios';
 import swal from 'sweetalert';
 
+import CustomButton from '../../../components/Button/Button';
+import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
+
 class  ManageTeachers  extends Component{
     constructor() {
         super();
     
         this.state = {
+            ClientId: null,
             Select_Teacher: '',
             Prefix: '',
             First_Name: '',
@@ -39,14 +43,79 @@ class  ManageTeachers  extends Component{
             Notes_Comments: '',
             High_Degree_Completed: '',
             Grade_Level: '',
-            Speciality:''
+            Speciality:'',
+            teachers:[]
       }
     }
     
-    onChange = (e) => {
-        //to get the input based on name and value
-        this.setState({ [e.target.name]: e.target.value });
+    componentDidMount() {
+       
+        axios.get(`http://localhost:8000/teacher/`)
+        .then(res => {
+          const teachers = res.data;
+          this.setState({ teachers });
+          console.log(teachers);
+        })
     }
+    
+    getTeachersName = (teachers,teacher_name)=>{
+      const getClientDeatilsWithName = (data) => {
+    
+        return equals(
+          pathOr(
+            {},
+            [
+              'First_Name'
+            ],
+            data
+          ),
+          teacher_name
+        )
+            
+      }
+      return filter(getClientDeatilsWithName,teachers)
+    }
+   
+  onChange = (e) => {
+
+      if(equals(e.target.name,"Select_Teacher")){
+        
+       const filterData =  head(this.getTeachersName(this.state.teachers,e.target.value))
+        console.log(filterData)
+          this.setState({
+                          ClientId: pathOr("",["id"],filterData),
+                          Select_Teacher: pathOr("",["Select_Teacher"],filterData),
+                          Prefix: pathOr("",["Prefix"],filterData),
+                          Middle_Name: pathOr("",["Middle_Name"],filterData),
+                          Last_Name: pathOr("",["Last_Name"],filterData),
+                          Email: pathOr("",["Email"],filterData),
+                          Mobile: pathOr("",["Mobile"],filterData),
+                          Emergency_Contact_Person1: pathOr("",["Emergency_Contact_Person1"],filterData),
+                          Emergency_Mobile1: pathOr("",["Emergency_Mobile1"],filterData),
+                          Relationship_1: pathOr("",["Relationship_1"],filterData),
+                          Emergency_Contact_Person2:pathOr("",["Emergency_Contact_Person2"],filterData),
+                          Emergency_Mobile2:pathOr("",["Emergency_Mobile2"],filterData),
+                          Relationship_2: pathOr("",["Relationship_2"],filterData),
+                          Address: pathOr("",["Address"],filterData),
+                          City:pathOr("",["City"],filterData),
+                          State:pathOr("",["State"],filterData),
+                          Zip_Code: pathOr("",["Zip_Code"],filterData),
+                          Country: pathOr("",["Country"],filterData),
+                          School_District: pathOr("",["School_District"],filterData),
+                          Currently_Teaching: pathOr("",["Currently_Teaching"],filterData),
+                          Ap_Classess: pathOr("",["Ap_Classess"],filterData),
+                          Notes_Comments: pathOr("",["Notes_Comments"],filterData),
+                          High_Degree_Completed: pathOr("",["High_Degree_Completed"],filterData),
+                          Grade_Level: pathOr("",["Grade_Level"],filterData),
+                          Speciality:pathOr("",["Speciality"],filterData)                         
+                          
+          })
+          return
+      }
+      this.setState({ [e.target.name]: e.target.value });
+      console.log(e.target.value,'value')
+  }
+
     onSubmit = (e) => {
         e.preventDefault();
         // get our form data out of state
@@ -80,19 +149,19 @@ class  ManageTeachers  extends Component{
                     style={{backgroundColor: '#034BB7', borderRadius: '10px 10px 0px 0px'}}>
                     <p class="headTitle">Administration Teacher Profile</p>
                 </nav>
-                <Form onSubmit={this.onSubmit}>
+                <Form >
                 <Card.Body class="card-body">
                     <Row class="row justify-content-center">
-                        <Col class="col-12 col-lg-4">
+                        <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label for="inputtext3" class="col col-form-label">select teacher</Form.Label>
+                                <Form.Label htmlfor="Select_Teacher" class="col col-form-label">select teacher</Form.Label>
                                 <Col>
-                                    <select class="selectStyle" id="inputGroupSelect01">
-                                        <option selected disabled>select teacher</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Select_Teacher"  onChange={this.onChange} required>
+                                    <option value="" disabled selected>select Teacher</option>
+                                        { this.state.teachers.map(teachers =>
+                                             <option key={teachers.id} value={Teacher => teachers.First_Name}>{teachers.First_Name}</option>)}    
+                                    </Form.Control>
+                                   
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -110,7 +179,7 @@ class  ManageTeachers  extends Component{
                                 <Form.Label htmlFor="First_Name" class="col col-form-label">First Name</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="First_Name" 
-                                    placeholder=""                                     
+                                    placeholder="First Name"                                     
                                     value={First_Name}                                          
                                     onChange={this.onChange} 
                                     name="First_Name"
@@ -412,10 +481,10 @@ class  ManageTeachers  extends Component{
                         </Col>
                     </Row>
                         <Row className="row justify-content-md-center">
-                                        <Button type="submit" className="col btnBlue">Add Admin</Button>
-                                        <Button  className="col btnBlue">Update Admin</Button>
-                                        <Button  className="col btnBlue">Delete Admin</Button>
-                                        <Button  className="col btnBlue">Cancel</Button>                              
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Cancel" />                             
                          </Row>
                 </Card.Body>
                 </Form> </Card>       

@@ -11,11 +11,15 @@ import {
 import axios from 'axios';
 import swal from 'sweetalert';
 
+import CustomButton from '../../../components/Button/Button';
+import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
+
 class ManageStudents extends Component{
     constructor() {
         super();
     
         this.state = {
+            ClientId: null,
             Select_Student: '',
             Student_First_Name: '',
             Student_Middle_Name: '',
@@ -44,14 +48,90 @@ class ManageStudents extends Component{
             Continuing_Student:'',
             Discount_Applied_Code:'',
             Exit_Program: '',
-            Exit_Comments:''
+            Exit_Comments:'',
+            students:[],           
+            teachers:[]
       }
     }
-    
+    componentDidMount() {
+       
+          axios.get(`http://localhost:8000/student/`)
+          .then(res => {
+            const students = res.data;
+            this.setState({ students });
+            console.log(students);
+          })
+          
+        axios.get(`http://localhost:8000/teacher/`)
+        .then(res => {
+          const teachers = res.data;
+          this.setState({ teachers });
+          console.log(teachers);
+        })
+      }
+      
+      getStudentsName = (students,student_name)=>{
+        const getClientDeatilsWithName = (data) => {
+      
+          return equals(
+            pathOr(
+              {},
+              [
+                'Student_First_Name'
+              ],
+              data
+            ),
+            student_name
+          )
+              
+        }
+        return filter(getClientDeatilsWithName,students)
+      }
+     
     onChange = (e) => {
-        //to get the input based on name and value
+
+        if(equals(e.target.name,"Select_Student")){
+          
+         const filterData =  head(this.getStudentsName(this.state.students,e.target.value))
+          console.log(filterData)
+            this.setState({
+                            ClientId: pathOr("",["id"],filterData),                          
+                            Select_Student: pathOr("",["Select_Student"],filterData),
+                            Student_First_Name: pathOr("",["Student_First_Name"],filterData),
+                            Student_Middle_Name: pathOr("",["Student_Middle_Name"],filterData),
+                            Student_Last_Name: pathOr("",["Student_Last_Name"],filterData),
+                            Student_Email: pathOr("",["Student_Email"],filterData),
+                            Student_Mobile: pathOr("",["Student_Mobile"],filterData),
+                            Emergency_Contact_Person1: pathOr("",["Emergency_Contact_Person1"],filterData),
+                            Emergency_Mobile1: pathOr("",["Emergency_Mobile1"],filterData),
+                            Relationship_1: pathOr("",["Relationship_1"],filterData),
+                            Emergency_Contact_Person2: pathOr("",["Emergency_Contact_Person2"],filterData),
+                            Emergency_Mobile2:pathOr("",["Emergency_Mobile2"],filterData),
+                            Relationship_2: pathOr("",["Relationship_2"],filterData),
+                            Student_Address: pathOr("",["Student_Address"],filterData),
+                            City: pathOr("",["City"],filterData),
+                            State:pathOr("",["State"],filterData),
+                            Zip_Code:pathOr("",["Zip_Code"],filterData),
+                            Country: pathOr("",["Country"],filterData),
+                            gate_student: pathOr("",["gate_student"],filterData),
+                            Current_School_Attending: pathOr("",["Current_School_Attending"],filterData),
+                            School_District: pathOr("",["School_District"],filterData),
+                            Grade_Level: pathOr("",["Grade_Level"],filterData),
+                            GAP:pathOr("",["GAP"],filterData),
+                            Additional_Comments: pathOr("",["Additional_Comments"],filterData),
+                            Enroll_Program:pathOr("",["Enroll_Program"],filterData),
+                            Assign_Teachers: pathOr("",["Assign_Teachers"],filterData),
+                            Continuing_Student:pathOr("",["Continuing_Student"],filterData),
+                            Discount_Applied_Code:pathOr("",["Discount_Applied_Code"],filterData),
+                            Exit_Program: pathOr("",["Exit_Program"],filterData),
+                            Exit_Comments:pathOr("",["Exit_Comments"],filterData),
+            })
+            return
+        }
         this.setState({ [e.target.name]: e.target.value });
+        console.log(e.target.value,'value')
     }
+
     onSubmit = (e) => {
         e.preventDefault();
         // get our form data out of state
@@ -128,6 +208,101 @@ class ManageStudents extends Component{
                 console.log(error);
               });
       }
+      onUpdate =() =>{
+        const { ClientId,
+            Select_Student,
+            Student_First_Name,
+            Student_Middle_Name,
+            Student_Last_Name,
+            Student_Email,
+            Student_Mobile,
+            Emergency_Contact_Person1,
+            Emergency_Mobile1,
+            Relationship_1,
+            Emergency_Contact_Person2,
+            Emergency_Mobile2,
+            Relationship_2,
+            Student_Address,
+            City,
+            State,
+            Zip_Code,
+            Country,
+            gate_student,
+            Current_School_Attending,
+            School_District,
+            Grade_Level,
+            GAP,
+            Additional_Comments,
+            Enroll_Program,
+            Assign_Teachers,
+            Continuing_Student,
+            Discount_Applied_Code,
+            Exit_Program,
+            Exit_Comments,          } = this.state;
+
+        axios.put('http://localhost:8000/student/'  + ClientId + '/', {
+                         Select_Student,
+                        Student_First_Name,
+                        Student_Middle_Name,
+                        Student_Last_Name,
+                        Student_Email,
+                        Student_Mobile,
+                        Emergency_Contact_Person1,
+                        Emergency_Mobile1,
+                        Relationship_1,
+                        Emergency_Contact_Person2,
+                        Emergency_Mobile2,
+                        Relationship_2,
+                        Student_Address,
+                        City,
+                        State,
+                        Zip_Code,
+                        Country,
+                        gate_student,
+                        Current_School_Attending,
+                        School_District,
+                        Grade_Level,
+                        GAP,
+                        Additional_Comments,
+                        Enroll_Program,
+                        Assign_Teachers,
+                        Continuing_Student,
+                        Discount_Applied_Code,
+                        Exit_Program,
+                        Exit_Comments,          
+        })  
+        .then(function (response) {
+              //access the results here....           
+            swal("success!", "Admin Updated", "success");// alert
+            console.log(response);// log
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      onDelete = () =>{
+        const {ClientId} = this.state;
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Record file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete('http://localhost:8000/student/'  + ClientId + '/') 
+                  swal("Client Record Deleted!", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Client Record is safe!");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+               })
+            }
     render(){
         const { 
             Select_Student,
@@ -168,18 +343,18 @@ class ManageStudents extends Component{
                 <nav className="nav justify-content-center" >
                     <p className="headTitle">Administration Student Profile</p>
                 </nav>
-             <Form onSubmit={this.onSubmit}>   
+             <Form >   
                 <Card.Body>
                     <Row className="row justify-content-center">
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="Student" className="col col-form-label">Select Student</Form.Label>
                                 <Col >
-                                    <Form.Control as="select" custom className="selectStyle" id="Student" name="Select_Student" value={Select_Student} onChange={this.onChange} required>
-                                        <option selected disabled>select teacher</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                
+                                    <Form.Control as="select" custom className="selectStyle" id="Select Student" name="Select_Student"  onChange={this.onChange} required>
+                                    <option value="" disabled selected>select Student</option>
+                                        { this.state.students.map(students =>
+                                             <option key={students.id} value={Student => students.Student_First_Name}>{students.Student_First_Name}</option>)}    
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -474,10 +649,10 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="inputtext3" className="col col-form-label">Aign Teachers</Form.Label>
                                 <Col>
-                                    <Form.Control as="select" custom className="selectStyle" id="inputGroupSelect01" name="Assign_Teachers" value={Assign_Teachers} onChange={this.onChange} required>
-                                        <option selected disabled>Assign Teachers</option>
-                                        <option value="1">assign Teachers 1</option>
-                                        <option value="2">assign Teachers 2</option>
+                                <Form.Control as="select" custom className="selectStyle" id="Select Teacher Student" name="Select_Teacher"  onChange={this.onChange} required>
+                                    <option value="" disabled selected>select client</option>
+                                        { this.state.teachers.map(teachers =>
+                                             <option key={teachers.id} value={Teacher => teachers.First_Name}>{teachers.First_Name}</option>)}    
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -527,12 +702,12 @@ class ManageStudents extends Component{
                             </Form.Group>
                         </Col>
                     </Row>
-                        <Row className="row justify-content-md-center">
-                                        <Button type="submit" className="col btnBlue">Add Admin</Button>
-                                        <Button  className="col btnBlue">Update Admin</Button>
-                                        <Button  className="col btnBlue">Delete Admin</Button>
-                                        <Button  className="col btnBlue">Cancel</Button>                              
-                         </Row>
+                            <Row className="row justify-content-md-center">            
+                                        <CustomButton  style="col btnBlue" BtnTxt="Add Admin" ClickEvent={this.onSubmit} />
+                                        <CustomButton  style="col btnBlue" BtnTxt="Update Admin" ClickEvent={this.onUpdate}/>    
+                                        <CustomButton  style="col btnBlue" BtnTxt="Delete Admin" ClickEvent={this.onDelete}/>
+                                        <CustomButton  style="col btnBlue" BtnTxt="Cancel" />                                       
+                            </Row>
                 </Card.Body>
             </Form>
             </Card>        

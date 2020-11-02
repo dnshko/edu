@@ -1,33 +1,33 @@
-<<<<<<< Updated upstream
-## Backend development workflow
+# Pre Requirements
 
-```json
-=======
-Backend development workflow
+| Tools | Download Link  |
+| ------ | ------ |
+| Node.js | [Node.js](https://nodejs.org/en/) |
+| python | [python](https://www.python.org/) |
+| xampp | [xampp](https://www.apachefriends.org/index.html) |
 
->>>>>>> Stashed changes
+- Add Database Name : **edutestdb**
+
+![](/readme/db.gif)
+
+```sh
+pip install virtualenv
+```
+# Backend Development Workflow
+
+```sh
 virtualenv env
 env\Scripts\activate
 pip install -r requirements.txt
+pip install mysqlclient
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
-<<<<<<< Updated upstream
 ```
 
+# Frontend Development Workflow
 
-## Frontend development workflow
-
-```json
-npm i
-npm start
-```
-
-=======
-
-
-
-Frontend development workflow
+```sh
 npm i
 npm start 
->>>>>>> Stashed changes
+```

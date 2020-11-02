@@ -147,16 +147,9 @@ class ClientSignup extends Component{
       }
       onDelete = () =>{
         const {ClientId} = this.state;
-        
-       // axios.delete('http://localhost:8000/client/'  + ClientId + '/')                   
-        //.then(function (response) {
-              //access the results here....           
-            //swal("success!", "Admin deleted", "success");// alert
-            //console.log(response);// log
-
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
+                text: "Once deleted, you will not be able to recover this Record file!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -164,19 +157,17 @@ class ClientSignup extends Component{
               .then((willDelete) => {
                 if (willDelete) {
                     axios.delete('http://localhost:8000/client/'  + ClientId + '/') 
-                  swal("Poof! Your imaginary file has been deleted!", {
+                  swal("Client Record deleted!", {
                     icon: "success",
                   });
                 } else {
-                  swal("Your imaginary file is safe!");
+                  swal("Client Record safe!");
                 }
               })
               .catch(function (error) {
                 console.log(error);
                })
-
-         
-     }
+            }
     render(){
         const { ClientName,clientNameError,errortext, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country } = this.state;
         const optionObj =[
