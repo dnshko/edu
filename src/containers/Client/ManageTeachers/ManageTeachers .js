@@ -166,15 +166,15 @@ class  ManageTeachers  extends Component{
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="prefix" class="col col-form-label">prefix</Form.Label>
+                                <Form.Label htmlFor="Prefix" class="col col-form-label">prefix</Form.Label>
                                 <Col >
                                    
-                                     <Form.Control as="select" custom className="selectStyle" id="prefix" name="prefix"  onChange={this.onChange} required>
-                                        <option value="prefix" disabled selected>prefix</option>
-                                       <option value="1">Dr.</option>
-                                        <option value="2">Mr.</option>
-                                        <option value="3">Mrs.</option>
-                                        <option value="3">Ms</option>
+                                     <Form.Control as="select" custom className="selectStyle" id="Prefix" name="Prefix"  onChange={this.onChange} required>
+                                        <option value="Prefix" disabled selected>prefix</option>
+                                       <option value="Dr.">Dr.</option>
+                                        <option value="Mr.">Mr.</option>
+                                        <option value="Mrs.">Mrs.</option>
+                                        <option value="Ms">Ms</option>
                                     </Form.Control>
                                   
                                 </Col>
@@ -275,7 +275,7 @@ class  ManageTeachers  extends Component{
                                         <option value="father1">father</option>
                                         <option value="mother">mother</option>
                                         <option value="relative ">relative </option>
-                                        <option value="relative ">friend</option>
+                                        <option value="friend ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -311,7 +311,7 @@ class  ManageTeachers  extends Component{
                                         <option value="father1">father</option>
                                         <option value="mother">mother</option>
                                         <option value="relative ">relative </option>
-                                        <option value="relative ">friend</option>
+                                        <option value="friend ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -447,41 +447,41 @@ class  ManageTeachers  extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label for="inputtext3" class="col col-form-label">grade level</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="1" label="freshman" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="2" label="sophomore" /> 
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="junior" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="senior" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id="" 
-                                        value="3" label="college level" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id="" 
-                                        value="3" label="above all" />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id=""
+                                        value="freshman" label="freshman" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id=""
+                                        value="sophomore" label="sophomore" onChange={this.onChange} /> 
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id=""
+                                        value="junior" label="junior" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id=""
+                                        value="senior" label="senior" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id="" 
+                                        value="college level" label="college level" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Grade_Level" id="" 
+                                        value="above all" label="above all" onChange={this.onChange} />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label for="speciality" class="col col-form-label">speciality</Form.Label>
                                 <Col>
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="1" label="english" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="2" label="math" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id="" 
-                                        value="3" label="science all" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="physics" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="chemistry" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="biology/zoology" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id="" 
-                                        value="3" label="1:1 lesson" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="above all" />
-                                    <Form.Check type="checkbox" class="form-check-input" name="" id=""
-                                        value="3" label="group lesson" />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="english" label="english" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="math" label="math" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id="" 
+                                        value="science all" label="science all" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="physics" label="physics" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="chemistry" label="chemistry" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="biology/zoology" label="biology/zoology" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id="" 
+                                        value="1:1 lesson" label="1:1 lesson" onChange={this.onChange} />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="above all" label="above all"onChange={this.onChange}  />
+                                    <Form.Check type="checkbox" class="form-check-input" name="Speciality" id=""
+                                        value="group lesson" label="group lesson" onChange={this.onChange} />
                                 </Col>
                             </Form.Group>
                         </Col>

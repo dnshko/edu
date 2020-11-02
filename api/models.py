@@ -39,20 +39,20 @@ class ClientAdmin(models.Model):
 
 
 class TeacherProfile(models.Model):
-    PREFIX = (
-        ('Dr.','Dr.'),
-        ('Mr.','Mr.'),
-        ('Mrs.','Mrs.'),
-        ('Ms.','Ms')
-    )
-    RELATIONSHIP = (
-        ('Father','Father'),
-        ('Mother','Mother'),
-        ('Relative','Relative '),
-        ('Friend','Friend')
-    )
+    # PREFIX = (
+    #     ('Dr.','Dr.'),
+    #     ('Mr.','Mr.'),
+    #     ('Mrs.','Mrs.'),
+    #     ('Ms.','Ms')
+    # )
+    # RELATIONSHIP = (
+    #     ('Father','Father'),
+    #     ('Mother','Mother'),
+    #     ('Relative','Relative '),
+    #     ('Friend','Friend')
+    # )
     Select_Teacher =  models.CharField(max_length=265, null=True, blank=True)
-    Prefix =  models.CharField(max_length=265, null=True, blank=True, choices=PREFIX)
+    Prefix =  models.CharField(max_length=265, null=True, blank=True)
     First_Name =  models.CharField(max_length=265, null=True, blank=True)
     Middle_Name =  models.CharField(max_length=265, null=True, blank=True)
     Last_Name =  models.CharField(max_length=265, null=True, blank=True)
@@ -60,10 +60,10 @@ class TeacherProfile(models.Model):
     Mobile =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Contact_Person1 =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Mobile1 =  models.CharField(max_length=265, null=True, blank=True)
-    Relationship_1 =  models.CharField(max_length=265, null=True, blank=True , choices=RELATIONSHIP)
+    Relationship_1 =  models.CharField(max_length=265, null=True, blank=True )
     Emergency_Contact_Person2 =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Mobile2 =  models.CharField(max_length=265, null=True, blank=True)
-    Relationship_2 =  models.CharField(max_length=265, null=True, blank=True, choices=RELATIONSHIP)
+    Relationship_2 =  models.CharField(max_length=265, null=True, blank=True)
     Address = models.CharField(max_length=265, null=True, blank=True)
     City =  models.CharField(max_length=265, null=True, blank=True)
     State =  models.CharField(max_length=265, null=True, blank=True)

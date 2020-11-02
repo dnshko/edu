@@ -456,7 +456,7 @@ class ManageStudents extends Component{
                                         <option value="father1">father</option>
                                         <option value="mother">mother</option>
                                         <option value="relative ">relative </option>
-                                        <option value="relative ">friend</option>
+                                        <option value="friend ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
@@ -494,7 +494,7 @@ class ManageStudents extends Component{
                                         <option value="father1">father</option>
                                         <option value="mother">mother</option>
                                         <option value="relative ">relative </option>
-                                        <option value="relative ">friend</option>
+                                        <option value="friend ">friend</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
