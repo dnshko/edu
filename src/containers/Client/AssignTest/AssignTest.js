@@ -12,7 +12,26 @@ import {
     Link,
 } from 'react-router-dom';
 
+import axios from 'axios';
 class AssignTest extends Component{
+    constructor() {
+        super();
+    
+        this.state = {  
+            students:[]
+      }
+    }
+    
+    componentDidMount() {
+       
+        axios.get(`http://localhost:8000/student/`)
+        .then(res => {
+          const students = res.data;
+          this.setState({ students });
+          console.log(students);
+        })
+        
+    }
     render(){
         return(
                 <>
@@ -27,12 +46,12 @@ class AssignTest extends Component{
                             <Form.Group as={Row}>
                                     <Form.Label for="inputtext3" class="col col-form-label">Select Student</Form.Label>
                                     <Col>
-                                            <select class="selectStyle" id="inputGroupSelect01" required>
-                                                <option selected disabled>Select Student</option>
-                                                <option value="1">Student 1</option>
-                                                <option value="2">Student 2</option>
-                                                <option value="3">Student 3</option>
-                                              </select>
+
+                                    <Form.Control as="select" custom className="selectStyle" id="Select Student" name="Select_Student"  onChange={this.onChange} required>
+                                    <option value="" disabled selected>select Student</option>
+                                        { this.state.students.map(students =>
+                                             <option key={students.id} value={Student => students.Student_First_Name}>{students.Student_First_Name}</option>)}    
+                                    </Form.Control>
                                     </Col>
                                 </Form.Group>
                             </Col>

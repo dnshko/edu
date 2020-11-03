@@ -55,7 +55,7 @@ class AdminClassroom extends Component{
         axios.post('http://localhost:8000/classroom/', {  Select_Teacher,Courses_Taught, Select_Students})                   
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Teacher added", "success");// alert
+                swal("success!", "Classroom Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                 console.log(response);// log
               })
               .catch(function (error) {

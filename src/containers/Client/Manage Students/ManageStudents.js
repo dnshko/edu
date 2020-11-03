@@ -39,6 +39,7 @@ class ManageStudents extends Component{
             Country: '',
             gate_student: '',
             Current_School_Attending: '',
+            academy_magnet_cbse:'',
             School_District:'' ,
             Grade_Level: '',
             GAP:'' ,
@@ -115,6 +116,7 @@ class ManageStudents extends Component{
                             Country: pathOr("",["Country"],filterData),
                             gate_student: pathOr("",["gate_student"],filterData),
                             Current_School_Attending: pathOr("",["Current_School_Attending"],filterData),
+                            academy_magnet_cbse: pathOr("",[" academy_magnet_cbse"],filterData),
                             School_District: pathOr("",["School_District"],filterData),
                             Grade_Level: pathOr("",["Grade_Level"],filterData),
                             GAP:pathOr("",["GAP"],filterData),
@@ -155,6 +157,7 @@ class ManageStudents extends Component{
             Country,
             gate_student,
             Current_School_Attending,
+            academy_magnet_cbse,
             School_District,
             Grade_Level,
             GAP,
@@ -188,6 +191,7 @@ class ManageStudents extends Component{
                         Country,
                         gate_student,
                         Current_School_Attending,
+                        academy_magnet_cbse,
                         School_District,
                         Grade_Level,
                         GAP,
@@ -201,7 +205,7 @@ class ManageStudents extends Component{
                     })                   
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Student added", "success");// alert
+                swal("success!", "Student added", "success").then(setInterval(function(){window.location.reload();},1500))// alert
                 console.log(response);// log
               })
               .catch(function (error) {
@@ -229,6 +233,7 @@ class ManageStudents extends Component{
             Country,
             gate_student,
             Current_School_Attending,
+            academy_magnet_cbse,
             School_District,
             Grade_Level,
             GAP,
@@ -260,6 +265,7 @@ class ManageStudents extends Component{
                         Country,
                         gate_student,
                         Current_School_Attending,
+                        academy_magnet_cbse,
                         School_District,
                         Grade_Level,
                         GAP,
@@ -273,7 +279,7 @@ class ManageStudents extends Component{
         })  
         .then(function (response) {
               //access the results here....           
-            swal("success!", "Admin Updated", "success");// alert
+            swal("success!", "Student Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
             console.log(response);// log
           })
           .catch(function (error) {
@@ -292,11 +298,11 @@ class ManageStudents extends Component{
               .then((willDelete) => {
                 if (willDelete) {
                     axios.delete('http://localhost:8000/student/'  + ClientId + '/') 
-                  swal("Client Record Deleted!", {
+                  swal("Student Record Deleted!", {
                     icon: "success",
-                  });
+                  }).then(setInterval(function(){window.location.reload();},1500));
                 } else {
-                  swal("Client Record is safe!");
+                  swal("Student Record is safe!");
                 }
               })
               .catch(function (error) {
@@ -324,6 +330,7 @@ class ManageStudents extends Component{
             Country,
             gate_student,
             Current_School_Attending,
+            academy_magnet_cbse,
             School_District,
             Grade_Level,
             GAP,
@@ -362,7 +369,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="first name" className="col col-form-label">Student First Name</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="first name"
-                                     placeholder="Student First Name"                                                                       
+                                     placeholder=" First Name"                                                                       
                                     value={Student_First_Name}                                          
                                     onChange={this.onChange} 
                                     name="Student_First_Name"
@@ -374,7 +381,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="Middle_Name" className="col col-form-label">Student Middle Name</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="Middle_Name"
-                                     placeholder="Student Middle Name"
+                                     placeholder="Middle Name"
                                                                        
                                     value={Student_Middle_Name}                                          
                                     onChange={this.onChange} 
@@ -400,7 +407,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="email" className="col col-form-label">Student Email</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="email"
-                                     placeholder="email" 
+                                     placeholder="Email" 
                                                                        
                                     value={Student_Email}                                          
                                     onChange={this.onChange} 
@@ -412,7 +419,7 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="mobile" className="col col-form-label">Student Mobile</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="mobile" 
+                                    <Form.Control type="text"  id="Mobile" 
                                     placeholder="mobile" 
                                                                       
                                     value={Student_Mobile}                                          
@@ -425,8 +432,8 @@ class ManageStudents extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="person1" className="col col-form-label">Emergency Contact Person1</Form.Label>
                                 <Col>
-                                    <Form.Control type="text" id="person1" 
-                                    placeholder="contact"
+                                    <Form.Control type="text" id="erson1" 
+                                    placeholder="Contact Person1"
                                                                       
                                     value={Emergency_Contact_Person1}                                          
                                     onChange={this.onChange} 
@@ -439,7 +446,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="mobile1" className="col col-form-label">Emergency Mobile1</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="mobile1"
-                                     placeholder="contact"
+                                     placeholder="Emergency Mobile1"
                                                                        
                                     value={Emergency_Mobile1}                                          
                                     onChange={this.onChange} 
@@ -504,7 +511,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="Student_Address" className="col col-form-label">Student Address</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="Student_Address" 
-                                    placeholder=""                                                                                                           
+                                    placeholder="Student Address"                                                                                                           
                                     value={Student_Address}                                          
                                     onChange={this.onChange} 
                                     name="Student_Address"
@@ -516,7 +523,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="city" className="col col-form-label">City</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="city" 
-                                    placeholder=""
+                                    placeholder="City"
                                                                       
                                     value={City}                                          
                                     onChange={this.onChange} 
@@ -529,7 +536,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="state" className="col col-form-label">State</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="state" 
-                                    placeholder="" 
+                                    placeholder="State" 
                                                                       
                                     value={State}                                          
                                     onChange={this.onChange} 
@@ -542,7 +549,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="zip code" className="col col-form-label">Zip code</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="zip code"
-                                     placeholder=""
+                                     placeholder="Zip code"
                                                                        
                                     value={Zip_Code}                                          
                                     onChange={this.onChange} 
@@ -555,7 +562,7 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="country" className="col col-form-label">Country</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="country" 
-                                    placeholder="" 
+                                    placeholder="Country" 
                                                                       
                                     value={Country}                                          
                                     onChange={this.onChange} 
@@ -576,7 +583,7 @@ class ManageStudents extends Component{
                                 <label htmlFor="school attending" className="col col-form-label">Current School Attending</label>
                                 <Col>
                                     <Form.Control type="text" className="form-control" id="school attending" 
-                                    placeholder="" 
+                                    placeholder="Current School" 
                                                                       
                                     value={Current_School_Attending}                                          
                                     onChange={this.onChange} 
@@ -589,9 +596,11 @@ class ManageStudents extends Component{
                                 <Form.Label htmlFor="schools" className="col col-form-label"></Form.Label>
                                 <Col>
                                     <Form.Check type="checkbox" className="form-check-input"  id="schools"
-                                         label="academy/magnet/cbse schools" 
-                                         name=""
-                                        
+                                         label="academy/magnet/cbse schools"
+                                         value="academy/magnet/cbse schools" 
+                                         onChange={this.onChange} 
+                                         name="academy_magnet_cbse"
+                                         required
                                         />
                                  </Col>
                             </Form.Group>

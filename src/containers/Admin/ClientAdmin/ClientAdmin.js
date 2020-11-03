@@ -93,7 +93,7 @@ class ClientAdmin extends Component{
           axios.post('http://localhost:8000/clientadmin/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})                   
               .then(function (response) {
                     //access the results here....           
-                  swal("success!", "Admin added", "success");// alert
+                  swal("success!", "Admin added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                   console.log(response);// log
                 })
                 .catch(function (error) {
@@ -106,7 +106,7 @@ class ClientAdmin extends Component{
             axios.put('http://localhost:8000/clientadmin/'  + ClientId + '/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})  
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Admin Updated", "success");// alert
+                swal("success!", "Admin Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                 console.log(response);// log
               })
               .catch(function (error) {
@@ -125,11 +125,11 @@ class ClientAdmin extends Component{
                   .then((willDelete) => {
                     if (willDelete) {
                         axios.delete('http://localhost:8000/clientadmin/'  + ClientId + '/') 
-                      swal("Client Record Deleted!", {
+                      swal("Admin Record Deleted!", {
                         icon: "success",
-                      });
+                      }).then(setInterval(function(){window.location.reload();},1500));
                     } else {
-                      swal("Client Record is safe!");
+                      swal("Admin Record is safe!");
                     }
                   })
                   .catch(function (error) {
@@ -178,7 +178,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="First Name" className="col col-form-label">First Name</Form.Label>
                                 <Col >
                                     <Form.Control  type="text"  id="First Name"
-                                     placeholder=""                                      
+                                     placeholder="First Name"                                      
                                      value={FirstName}
                                      onChange={this.onChange}
                                      name="FirstName"
@@ -190,7 +190,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="Last Name" className="col col-form-label">Last Name</Form.Label>
                                 <Col >
                                     <Form.Control  type="text"  id="Last Name"
-                                     placeholder=""
+                                     placeholder="Last Name"
                                      value={LastName}
                                      onChange={this.onChange}
                                      name="LastName"
@@ -201,8 +201,8 @@ class ClientAdmin extends Component{
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="Email" className="col col-form-label">Email</Form.Label>
                                 <Col>
-                                    <Form.Control type="text"  id="Emai"
-                                     placeholder=""
+                                    <Form.Control type="text"  id="Email"
+                                     placeholder="Email"
                                      value={Email}
                                      onChange={this.onChange}
                                      name="Email"
@@ -214,7 +214,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="licence key" className="col col-form-label">licence key</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="licence key" 
-                                    placeholder="" 
+                                    placeholder="licence key" 
                                     value={licence}
                                     onChange={this.onChange}
                                     name="licence"
@@ -226,7 +226,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="login email" className="col col-form-label">login email</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="login email" 
-                                    placeholder="" 
+                                    placeholder="login email" 
                                     value={loginEmail}
                                     onChange={this.onChange}
                                     name="loginEmail"
@@ -238,7 +238,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="password" className="col col-form-label">password</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="password"
-                                     placeholder="" 
+                                     placeholder="password" 
                                      value={password}
                                      onChange={this.onChange}
                                      name="password"
@@ -250,7 +250,7 @@ class ClientAdmin extends Component{
                                 <Form.Label htmlFor="password" className="col col-form-label">confirm password</Form.Label>
                                 <Col>
                                     <Form.Control type="text"  id="password"
-                                     placeholder="" 
+                                     placeholder="confirm password" 
                                      value={confirm_password}
                                      onChange={this.onChange}
                                      name="confirm_password"

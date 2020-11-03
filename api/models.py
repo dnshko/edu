@@ -113,6 +113,7 @@ class StudentProfile(models.Model):
     Country =  models.CharField(max_length=265, null=True, blank=True)
     gate_student = models.CharField(max_length=265, null=True, blank=True)
     Current_School_Attending =  models.CharField(max_length=265, null=True, blank=True)
+    academy_magnet_cbse = models.CharField(max_length=265, null=True, blank=True)
     School_District =  models.CharField(max_length=265, null=True, blank=True)
     Grade_Level =  models.CharField(max_length=265, null=True, blank=True) 
     GAP =  models.CharField(max_length=265, null=True, blank=True)

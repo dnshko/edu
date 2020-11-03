@@ -107,30 +107,30 @@ class ClientSignup extends Component{
         // get our form data out of state
         const { ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
         
-         if(isEmpty(mobile)){
+        //  if(isEmpty(mobile)){
              
-            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-            if(mobile.value.match(phoneno))
-            {
-                this.setState({clientNameError : false,errortext:''})
-            }
-            else
-            {
-            this.setState({clientNameError : true,errortext:'phone number format incorrect'})
-            }
+        //     var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        //     if(mobile.value.match(phoneno))
+        //     {
+        //         this.setState({clientNameError : false,errortext:''})
+        //     }
+        //     else
+        //     {
+        //     this.setState({clientNameError : true,errortext:'phone number format incorrect'})
+        //     }
         
             
         axios.post('http://localhost:8000/client/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Admin added", "success");// alert
+                swal("success!", "Admin added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                 console.log(response);// log
               })
               .catch(function (error) {
                 console.log(error);
               });
               
-      }
+    //   }
     }
       onUpdate =() =>{
         const {ClientId, ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
@@ -138,7 +138,7 @@ class ClientSignup extends Component{
         axios.put('http://localhost:8000/client/'  + ClientId + '/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
         .then(function (response) {
               //access the results here....           
-            swal("success!", "Admin Updated", "success");// alert
+            swal("success!", "Clients Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
             console.log(response);// log
           })
           .catch(function (error) {
@@ -159,7 +159,7 @@ class ClientSignup extends Component{
                     axios.delete('http://localhost:8000/client/'  + ClientId + '/') 
                   swal("Client Record deleted!", {
                     icon: "success",
-                  }).then(setInterval(function(){window.location.reload();},2000));
+                  }).then(setInterval(function(){window.location.reload();},1500));
                 } else {
                   swal("Client Record safe!");
                 }

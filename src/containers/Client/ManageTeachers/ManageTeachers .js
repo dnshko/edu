@@ -132,7 +132,7 @@ class  ManageTeachers  extends Component{
                     })                   
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Teacher added", "success");// alert
+                swal("success!", "Teacher added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                 console.log(response);// log
               })
               .catch(function (error) {
@@ -198,7 +198,7 @@ class  ManageTeachers  extends Component{
         })  
         .then(function (response) {
               //access the results here....           
-            swal("success!", "Admin Updated", "success");// alert
+            swal("success!", "Teacher Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
             console.log(response);// log
           })
           .catch(function (error) {
@@ -217,11 +217,11 @@ class  ManageTeachers  extends Component{
               .then((willDelete) => {
                 if (willDelete) {
                     axios.delete('http://localhost:8000/teacher/'  + ClientId + '/') 
-                  swal("Client Record Deleted!", {
+                  swal("Teacher Record Deleted!", {
                     icon: "success",
-                  });
+                  }).then(setInterval(function(){window.location.reload();},1500));
                 } else {
-                  swal("Client Record is safe!");
+                  swal("Teacher Record is safe!");
                 }
               })
               .catch(function (error) {

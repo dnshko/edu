@@ -84,7 +84,7 @@ class ClientAdd extends Component{
         axios.post('http://localhost:8000/client/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
             .then(function (response) {
                   //access the results here....           
-                swal("success!", "Admin added", "success");// alert
+                swal("success!", "Client added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
                 console.log(response);// log
               })
               .catch(function (error) {
@@ -98,7 +98,7 @@ class ClientAdd extends Component{
         axios.put('http://localhost:8000/client/'  + ClientId + '/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
         .then(function (response) {
               //access the results here....           
-            swal("success!", "Admin Updated", "success");// alert
+            swal("success!", "Client Updated", "success").then(setInterval(function(){window.location.reload();},1500));// alert
             console.log(response);// log
           })
           .catch(function (error) {
@@ -111,7 +111,7 @@ class ClientAdd extends Component{
         axios.delete('http://localhost:8000/client/'  + ClientId + '/')                   
         .then(function (response) {
               //access the results here....           
-            swal("success!", "Admin deleted", "success");// alert
+            swal("success!", "Client deleted", "success").then(setInterval(function(){window.location.reload();},1500));// alert
             console.log(response);// log
           })
           .catch(function (error) {
