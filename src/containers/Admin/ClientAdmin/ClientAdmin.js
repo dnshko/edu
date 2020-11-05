@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import swal from 'sweetalert';
 import CustomButton from '../../../components/Button/Button';
+import CustomTextBox from '../../../components/TextBox/TextBox';
 import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
 
 class ClientAdmin extends Component{
@@ -174,6 +175,22 @@ class ClientAdmin extends Component{
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
+
+{/* Custom Text Box  */}
+                            <CustomTextBox
+                             htFor="First Name" 
+                             style="col col-form-label" 
+                             txtBoxLabel="First Name" 
+                             txtBoxType="text"
+                             txtBoxID="First Name"
+                             txtBoxPH="First Name"
+                             txtBoxValue={FirstName}
+                             changeEvent={this.onChange}
+                             txtBoxName={FirstName}
+
+                            />
+{/* Custom Text Box  End*/}
+{/* Reference field */}
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="First Name" className="col col-form-label">First Name</Form.Label>
                                 <Col >
@@ -186,6 +203,7 @@ class ClientAdmin extends Component{
                                      />
                                 </Col>
                             </Form.Group>
+{/* Reference field End */}
                             <Form.Group as={Row}>
                                 <Form.Label htmlFor="Last Name" className="col col-form-label">Last Name</Form.Label>
                                 <Col >
