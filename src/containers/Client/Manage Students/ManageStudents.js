@@ -50,6 +50,7 @@ class ManageStudents extends Component{
             Discount_Applied_Code:'',
             Exit_Program: '',
             Exit_Comments:'',
+            Password:'',
             students:[],           
             teachers:[]
       }
@@ -127,6 +128,7 @@ class ManageStudents extends Component{
                             Discount_Applied_Code:pathOr("",["Discount_Applied_Code"],filterData),
                             Exit_Program: pathOr("",["Exit_Program"],filterData),
                             Exit_Comments:pathOr("",["Exit_Comments"],filterData),
+                            Exit_Comments:pathOr("",["Password"],filterData),
             })
             return
         }
@@ -168,6 +170,7 @@ class ManageStudents extends Component{
             Discount_Applied_Code,
             Exit_Program,
             Exit_Comments,
+            Password
             } = this.state;
 
         axios.post('http://localhost:8000/student/', 
@@ -201,7 +204,8 @@ class ManageStudents extends Component{
                         Continuing_Student,
                         Discount_Applied_Code,
                         Exit_Program,
-                        Exit_Comments,          
+                        Exit_Comments,
+                        Password          
                     })                   
             .then(function (response) {
                   //access the results here....           
@@ -243,7 +247,10 @@ class ManageStudents extends Component{
             Continuing_Student,
             Discount_Applied_Code,
             Exit_Program,
-            Exit_Comments,          } = this.state;
+            Exit_Comments, 
+            Password
+        
+        } = this.state;
 
         axios.put('http://localhost:8000/student/'  + ClientId + '/', {
                          Select_Student,
@@ -275,7 +282,8 @@ class ManageStudents extends Component{
                         Continuing_Student,
                         Discount_Applied_Code,
                         Exit_Program,
-                        Exit_Comments,          
+                        Exit_Comments,
+                        Password          
         })  
         .then(function (response) {
               //access the results here....           
@@ -341,6 +349,7 @@ class ManageStudents extends Component{
             Discount_Applied_Code,
             Exit_Program,
             Exit_Comments,
+            Password
             } = this.state;
         return(
             <>
@@ -412,6 +421,19 @@ class ManageStudents extends Component{
                                     value={Student_Email}                                          
                                     onChange={this.onChange} 
                                     name="Student_Email"
+                                    required
+                                     />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label htmlFor="Student Password" className="col col-form-label">Student Password</Form.Label>
+                                <Col >
+                                    <Form.Control type="text"  id="Student Password"
+                                     placeholder="Password" 
+                                                                       
+                                    value={Password}                                          
+                                    onChange={this.onChange} 
+                                    name="Password"
                                     required
                                      />
                                 </Col>

@@ -99,6 +99,7 @@ class StudentProfile(models.Model):
     Student_Middle_Name =  models.CharField(max_length=265, null=True, blank=True)
     Student_Last_Name =  models.CharField(max_length=265, null=True, blank=True)
     Student_Email =  models.CharField(max_length=265, null=True, blank=True)
+    Password =  models.CharField(max_length=265, null=True, blank=True)
     Student_Mobile =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Contact_Person1 =  models.CharField(max_length=265, null=True, blank=True)
     Emergency_Mobile1 =  models.CharField(max_length=265, null=True, blank=True)

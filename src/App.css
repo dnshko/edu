@@ -2,7 +2,7 @@
 @font-face {font-family: "Biko"; src: url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.eot"); src: url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.woff") format("woff"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/e5d18e657f83f8750cd54c899de3a38b.svg#Biko") format("svg"); }
 
 body{
-    background: url('/static/img/bg.png');
+    /* background: url(''); */
 
 }
 .headTitle{
