@@ -5,11 +5,12 @@ const { Countdown } = Statistic;
 class Counter extends React.Component {
   render() {
     return (
-      <Countdown
-        title="Countdown"
-        value={Date.now() + this.props.time * 1000 + 1000}
-        onFinish={this.props.onSubmit}
-      />
+      // <Countdown
+      //   title="Countdown"
+      //   value={Date.now() + this.props.time * 1000 + 1000}
+      //   onFinish={this.props.onSubmit}
+      // />
+      <></>
     );
   }
 }

@@ -66,19 +66,9 @@ class QuizDetail extends React.Component {
     const { quizDetail, loading } = this.props;
     return (
         <div className="container py-5">
-          <div><Link to="/"><Button type="dashed">Back</Button></Link></div>
-          <h3>Quiz Rules</h3>
-          <p>
-            Ambient air should be neat and clean as it is a survival need for
-            every living being. Hence, bad quality air is a big problem for all
-            of us. For that Air Visual will help to sense the environment
-            independently and showcase the results to each person on Web
-            Application with accuracy. Live Website will help the user to open
-            it anywhere from mobile or Pc visualizing the results with the most
-            efficient way along with the survival Precaution and First Aid
-            against any dangerous alert. Minimal cost device and user-friendly
-            interaction with Web application will.
-          </p>
+          <div><Link to="/list"><Button type="dashed">Back</Button></Link></div>
+          <h3>{quizDetail.title}</h3>
+          
           {loading ? (
               <Skeleton active />
             ) : (
@@ -89,7 +79,7 @@ class QuizDetail extends React.Component {
               this.setState({ modalVisible: true });
             }}
           >
-            Start Quiz
+            preview quiz
           </Button>
               <Modal
                 title={

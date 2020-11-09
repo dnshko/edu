@@ -111,7 +111,7 @@ const FormItem = (props) => {
               {answekeys.length < 5 ? (
                 <div
                   onClick={() => add1(k)}
-                  style={{ display: "flex", width: "100px" }}
+                  style={{ display: "flex", width: "100px", margin: "0 0 10px 250px"}}
                 >
                   <Button type="dashed">+ Add Choice</Button>
                 </div>

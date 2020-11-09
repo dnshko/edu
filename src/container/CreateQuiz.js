@@ -213,7 +213,7 @@ class CreateQuiz extends React.Component {
             />
             
             <Form.Item className="text-center">
-              <Button type="dashed" onClick={this.add} style={{ width: "60%" }}>
+              <Button type="dashed" onClick={this.add} style={{ width: "60%", margin: "20px 0 0 180px"}}>
                 <Icon type="plus" /> Add Question
               </Button>
             </Form.Item>
@@ -222,7 +222,9 @@ class CreateQuiz extends React.Component {
               <Button
                 type="primary"
                 htmlType="submit"
+                className="col btnBlue"
                 disabled={this.props.loading}
+                style={{ width: "60%", margin: "20px 0 0 180px"}}
               >
                 Submit
               </Button>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Steps, Button } from "antd";
 
+import { Link, Redirect } from 'react-router-dom';
 const { Step } = Steps;
 
 class Questions extends React.Component {
@@ -26,26 +27,27 @@ class Questions extends React.Component {
     const { current } = this.state;
     return (
       <div>
-        <Steps progressDot current={current}>
+        {/* <Steps progressDot current={current}>
           {questions &&
             questions.map((item, index) => (
               <Step key={index} title={index + 1} />
             ))}
-        </Steps>
+        </Steps> */}
         <div className="steps-content">{questions[current]}</div>
         <div className="steps-action">
           {current < questions.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
               Next
             </Button>
-          )}
+          )}<br/>
           {current === questions.length - 1 && (
-            <Button type="primary" onClick={this.props.submit}>
-              Submit
-            </Button>
-          )}
+            // <Button type="primary" onClick={this.props.submit}>
+            //   Submit
+            // </Button>
+            <div><Link to="/list"><Button type="primary">close </Button></Link></div>
+          )}<br/>
           {current > 0 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+            <Button  onClick={() => this.prev()}>
               Previous
             </Button>
           )}
