@@ -19,7 +19,7 @@ class QuizApp extends Component {
       { id: 'data/csharp.json', name: 'C Sharp' },
       { id: 'data/designPatterns.json', name: 'Design Patterns' }
     ],
-    quizId: 'data/javascript.json'
+    quizId: 'http://localhost:8000/quiz/1'
   };
 
   pager = {

@@ -42,7 +42,7 @@ export const detailQuiz = (quizId) => {
   return (dispatch) => {
     dispatch(quizStart());
     axios
-        .get(`${endpoint}/${quizId}`)
+        .get(`${endpoint}/quiz/${quizId}`)
         .then((res) => {
             dispatch(quizDetailSuccess(res.data))
         })

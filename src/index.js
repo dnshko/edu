@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import quiz_reducer from "./store/reducers/quiz";
 import "antd/dist/antd.css";
-
+import DataCT from './containers/DataCreationTool/index';
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -20,7 +20,8 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, composeEnhances(applyMiddleware(thunk)));
 const app = (
   <Provider store={store}>
-    <App />
+    {/* <App /> */}
+    <DataCT />
   </Provider>
 );
 
