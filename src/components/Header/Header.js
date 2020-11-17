@@ -43,6 +43,12 @@ class Header extends Component{
                     <li className="nav-item">
                     <Link to="/list"> <p className="nav-link" >Quiz list</p></Link>
                     </li>
+                    <li className="nav-item">
+                    <Link to="/Dct"> <p className="nav-link" >Data Creation Tool</p></Link>
+                    </li>
+                    <li className="nav-item">
+                    <Link to="/login"> <p className="nav-link" >Student Login</p></Link>
+                    </li>
                  </ul>
               </div>
         </nav>

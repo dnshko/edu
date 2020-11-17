@@ -1,0 +1,28 @@
+body{
+    top: 0px;
+    left: 0px;
+    background: #034BB7 0% 0% no-repeat padding-box;
+    opacity: 1;
+  }
+  h5{
+  text-align: center;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  }
+  .btn{
+  background: var(--unnamed-color-f05103) 0% 0% no-repeat padding-box;
+  background: #F05103 0% 0% no-repeat padding-box;
+  border-radius: 30px;
+  opacity: 1;
+  color: white;
+  }
+  label{
+    font-weight: bold;
+    
+  }
+  .crow{
+    justify-content:center;
+    margin-top: 120px;
+    text-align: center;
+  }

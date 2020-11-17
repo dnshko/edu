@@ -1,5 +1,5 @@
-from .models import Client, ClientAdmin, TeacherProfile, StudentProfile, AdminClassroomAssignments
-from .serializers import ClientSerializers,ClientAdminSerializers, TeacherProfileSerializers, StudentProfileSerializers, AdminClassroomAssignmentsSerializers
+from .models import Client, ClientAdmin, TeacherProfile, StudentProfile, AdminClassroomAssignments,AssignTest
+from .serializers import ClientSerializers,ClientAdminSerializers, TeacherProfileSerializers, StudentProfileSerializers, AdminClassroomAssignmentsSerializers,AssignTestSerializers
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -119,3 +119,24 @@ class AdminClassroomAssignmentsAPIVIEW(mixins.ListModelMixin,mixins.CreateModelM
     def delete(self, request, id):
         return self.destroy(request, id)
 
+
+class AssignTestAPIVIEW(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+    serializer_class = AssignTestSerializers
+    queryset = AssignTest.objects.all()
+
+    lookup_field ='id'
+
+    def get(self, request , id = None):
+        if id:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, id=None):
+        return self.update(request, id)
+    
+    def delete(self, request, id):
+        return self.destroy(request, id)

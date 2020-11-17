@@ -138,4 +138,15 @@ class AdminClassroomAssignments(models.Model):
         return self.Select_Teacher
 
 
+class AssignTest(models.Model):
+    Select_Student =models.CharField(max_length=265, null=True, blank=True)
+    Select_Program = models.CharField(max_length=265, null=True, blank=True)
+    Available_Test = models.CharField(max_length=265, null=True, blank=True)
+    View_By = models.CharField(max_length=265, null=True, blank=True)
+
+    def __str__(self):
+        return self.Select_Student
+
+
+
 

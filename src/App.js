@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <>
       <Router>
-          <Header />
+          {/* <Header /> */}
           <BaseRouter />
       </Router>   
  

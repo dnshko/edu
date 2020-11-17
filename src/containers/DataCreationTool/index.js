@@ -15,33 +15,33 @@ export default class DataCT extends Component {
         return (
             <div>
                      
-    <Container  style={{marginTop: '50px'}}>        
+    <Container  style={{marginTop: '60px'}}>        
             <Card >
                 <nav className="nav justify-content-center" >
                     <p className="headTitle">Data Creation Tool</p>
                 </nav>
              <Form >   
                 <Card.Body>
-                    <Row className="row justify-content-center">
+                    <Row className="row justify-content-left">
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Name" className="col col-form-label">Test Name </Form.Label>
-                                <Col >
+                                <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Test Name </Form.Label>
+                                <Col style={{ textAlign: "left" }}>
                                     <Form.Control type="text"  id="Test Name" 
-                                    placeholder="Test Name" 
-                                    name="Test Name"
-                                    required
+                                    placeholder="" 
+                                    
+                                    required 
                                     />
                                 </Col>
                             </Form.Group>
                         </Col>
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Desc" className="col col-form-label">Test Desc</Form.Label>
-                                <Col >
+                                <Form.Label htmlFor="Test Desc" className="col col-form-label" style={{ textAlign: "left" }}>Test Desc</Form.Label>
+                                <Col  >
                                     <Form.Control type="text"  id="Test Desc" 
-                                    placeholder="Test Desc" 
-                                    name="Test Desc"
+                                    placeholder="" 
+                                    
                                     required
                                     />
                                 </Col>
@@ -49,21 +49,21 @@ export default class DataCT extends Component {
                         </Col>  
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Section" className="col col-form-label">Section</Form.Label>
+                                <Form.Label htmlFor="Section" className="col col-form-label" style={{ textAlign: "left" }}>Section</Form.Label>
                                 <Col>
                                     <Form.Control as="select" custom className="selectStyle" id="Section" name="Section" onChange={this.onChange} required>
                                         <option value="Section"selected disabled>Section</option>
-                                        <option value="math">math</option>
-                                        <option value="reading">reading</option>
-                                        <option value="science ">science </option>
-                                        <option value="writing ">writing</option>
+                                        <option value="math">Math</option>
+                                        <option value="reading">Reading</option>
+                                        <option value="science ">Science </option>
+                                        <option value="writing ">Writing</option>
                                     </Form.Control>
                                 </Col>
                             </Form.Group>
                         </Col>  
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer Type" className="col col-form-label">Answer Type</Form.Label>
+                                <Form.Label htmlFor="Answer Type" className="col col-form-label" style={{ textAlign: "left" }}>Answer Type</Form.Label>
                                 <Col>
                                     <Form.Control as="select" custom className="selectStyle" id="Answer Type" name="Answer Type" onChange={this.onChange} required>
                                         <option value="Answer Type"selected disabled>Answer Type</option>
@@ -77,12 +77,12 @@ export default class DataCT extends Component {
                         </Col>       
                     </Row>
                     {/* row end */}
-                    <Row className="row justify-content-center">
-                            <Col lg={4} sm={12}>
+                    <Row className="row">
+                            <Col lg={3} sm={12} >
                                 <Form.Group as={Row}>
-                                    <Form.Label htmlFor="Test Type" className="col col-form-label">Test Type</Form.Label>
+                                    <Form.Label htmlFor="Test Type" className="col col-form-label" style={{ textAlign: "left" }}>Test Type</Form.Label>
                                     <Col>
-                                        <Form.Control as="select" custom className="selectStyle" id="Test Type" name="Test Type" onChange={this.onChange} required>
+                                        <Form.Control as="select" custom className="selectStyle" id="Test Type" name="Test Type" onChange={this.onChange} required style={{ textAlign: "left" }}> 
                                             <option value="Test Type"selected disabled>Test Type</option>
                                             <option value="ACT">ACT</option>
                                             <option value="SAT">SAT</option>
@@ -90,9 +90,27 @@ export default class DataCT extends Component {
                                     </Col>
                                 </Form.Group>
                             </Col>
+                            
+                            
+                            </Row>
+                            <Row className="row">
                             <Col lg={4} sm={12}>
                                 <Form.Group as={Row}>
-                                    <Form.Label htmlFor="section duration" className="col col-form-label">section duration</Form.Label>
+                                    <Form.Label htmlFor="section duration" className="col col-form-label" style={{ textAlign: "left" }}>Subject Category</Form.Label>
+                                    <Col>
+                                        <Form.Control as="select" custom className="selectStyle" id="Subject Category" name="Subject Category" onChange={this.onChange} required>
+                                            <option value="section duration"selected disabled>Subject Category</option>
+                                            <option value="45 mins">Algebra</option>
+                                            <option value="30 mins">Geometry</option>
+                                        </Form.Control>
+                                    </Col>
+                                    
+                            
+                                </Form.Group>
+                            </Col>  
+                            <Col lg={4} sm={12}>
+                                <Form.Group as={Row}>
+                                    <Form.Label htmlFor="section duration" className="col col-form-label">Section duration</Form.Label>
                                     <Col>
                                         <Form.Control as="select" custom className="selectStyle" id="section duration" name="section duration" onChange={this.onChange} required>
                                             <option value="section duration"selected disabled>section duration</option>
@@ -100,26 +118,17 @@ export default class DataCT extends Component {
                                             <option value="30 mins">30 mins</option>
                                         </Form.Control>
                                     </Col>
+                                    
                                 </Form.Group>
                             </Col>  
-                            <Col lg={4} sm={12}>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="question type" className="col col-form-label">question type</Form.Label>
-                                    <Col>
-                                        <Form.Control as="select" custom className="selectStyle" id="question type" name="question type" onChange={this.onChange} required>
-                                            <option value="question type"selected disabled>question type</option>
-                                            <option value="multiple choice">multiple choice</option>
-                                            <option value="check boxes">check boxes</option>
-                                        </Form.Control>
-                                    </Col>
-                                </Form.Group>
-                            </Col>  
+                           
+                           
                     </Row>
                     {/* row end */}
                     <Row className="row justify-content-center">
                             <Col lg={4} sm={12}>
                                 <Form.Group as={Row}>
-                                    <Form.Label htmlFor="Question number" className="col col-form-label">Question number</Form.Label>
+                                    <Form.Label htmlFor="Question number" className="col col-form-label" style={{ textAlign: "left" }}>Question number</Form.Label>
                                     <Col>
                                         <Form.Control as="select" custom className="selectStyle" id="Question number" name="Question number" onChange={this.onChange} required>
                                             <option value="Question number"selected disabled>Question number</option>
@@ -141,15 +150,27 @@ export default class DataCT extends Component {
                                     </Col>
                                 </Form.Group>
                             </Col>   
+                            <Col lg={4} sm={12}>
+                                <Form.Group as={Row}>
+                                    <Form.Label htmlFor="question type" className="col col-form-label">question type</Form.Label>
+                                    <Col>
+                                        <Form.Control as="select" custom className="selectStyle" id="question type" name="question type" onChange={this.onChange} required>
+                                            <option value="question type"selected disabled>question type</option>
+                                            <option value="multiple choice">multiple choice</option>
+                                            <option value="check boxes">check boxes</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                            </Col>  
                     </Row>
                     {/* row end */}
                     <Row className="row">
                         <Col lg={12} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Name" className="col col-form-label">Test Name </Form.Label>
-                                <Col >
+                                <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Question Header: </Form.Label>
+                                <Col sm={11}>
                                     <Form.Control type="text"  id="Test Name" 
-                                    placeholder="Test Name" 
+                                    placeholder="" 
                                     name="Test Name"
                                     required
                                     />
@@ -161,10 +182,10 @@ export default class DataCT extends Component {
                     <Row className="row">
                         <Col lg={12} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Name" className="col col-form-label">Test Name </Form.Label>
-                                <Col >
+                                <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Question Text </Form.Label>
+                                <Col sm={11}>
                                     <Form.Control type="text"  id="Test Name" 
-                                    placeholder="Test Name" 
+                                    placeholder="" 
                                     name="Test Name"
                                     required
                                     />
@@ -176,7 +197,7 @@ export default class DataCT extends Component {
                     <Row className="row">
                             <Col lg={4} sm={12}>
                                 <Form.Group as={Row}>
-                                    <Form.Label htmlFor="question image" className="col col-form-label">question image</Form.Label>
+                                    <Form.Label htmlFor="question image" className="col col-form-label" style={{ textAlign: "left" }}>question image</Form.Label>
                                     <Col>
                                         <Form.Control as="select" custom className="selectStyle" id="question image" name="question image" onChange={this.onChange} required>
                                             <option value="question image"selected disabled>question image</option>
@@ -190,10 +211,10 @@ export default class DataCT extends Component {
                     <Row className="row justify-content-center">
                     <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer1 text " className="col col-form-label">Answer1 text </Form.Label>
+                                <Form.Label htmlFor="Answer1 text " className="col col-form-label" style={{ textAlign: "left" }}>Answer1 text </Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="Answer1 text " 
-                                    placeholder="Answer1 text" 
+                                    placeholder="" 
                                     name="Answer1 text "
                                     required
                                     />
@@ -205,7 +226,7 @@ export default class DataCT extends Component {
                                 <Form.Label htmlFor="Answer2 text" className="col col-form-label">Answer2 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="Answer2 text" 
-                                    placeholder="Answer2 text" 
+                                    placeholder="" 
                                     name="Answer2 text"
                                     required
                                     />
@@ -217,7 +238,7 @@ export default class DataCT extends Component {
                                 <Form.Label htmlFor="Answer3 text" className="col col-form-label">Answer3 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="Answer3 text" 
-                                    placeholder="Answer3 text" 
+                                    placeholder="" 
                                     name="Answer3 text"
                                     required
                                     />
@@ -241,10 +262,10 @@ export default class DataCT extends Component {
                     <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step1 text" className="col col-form-label">step1 text</Form.Label>
+                                <Form.Label htmlFor="step1 text" className="col col-form-label" style={{ textAlign: "left" }}>step1 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="step1 text" 
-                                    placeholder="step1 text" 
+                                    placeholder="" 
                                     name="step1 text"
                                     required
                                     />
@@ -269,10 +290,10 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step2 text" className="col col-form-label">step2 text</Form.Label>
+                                <Form.Label htmlFor="step2 text" className="col col-form-label" style={{ textAlign: "left" }}>step2 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="step2 text" 
-                                    placeholder="step2 text" 
+                                    placeholder="" 
                                     name="step2 text"
                                     required
                                     />
@@ -297,10 +318,10 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step3 text" className="col col-form-label">step3 text</Form.Label>
+                                <Form.Label htmlFor="step3 text" className="col col-form-label" style={{ textAlign: "left" }}>step3 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="step3 text" 
-                                    placeholder="step3 text" 
+                                    placeholder="" 
                                     name="step3 text"
                                     required
                                     />
@@ -325,10 +346,10 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step4 text" className="col col-form-label">step4 text</Form.Label>
+                                <Form.Label htmlFor="step4 text" className="col col-form-label" style={{ textAlign: "left" }}>step4 text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="step4 text" 
-                                    placeholder="step4 text" 
+                                    placeholder="" 
                                     name="step4 text"
                                     required
                                     />
@@ -353,10 +374,10 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="all steps text" className="col col-form-label">all steps text</Form.Label>
+                                <Form.Label htmlFor="all steps text" className="col col-form-label" style={{ textAlign: "left" }}>all steps text</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="all steps text" 
-                                    placeholder="all steps text" 
+                                    placeholder="" 
                                     name="all steps text"
                                     required
                                     />
@@ -378,10 +399,10 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="video link" className="col col-form-label">video link</Form.Label>
+                                <Form.Label htmlFor="video link" className="col col-form-label" style={{ textAlign: "left" }}>video link</Form.Label>
                                 <Col >
                                     <Form.Control type="text"  id="video link" 
-                                    placeholder="video link" 
+                                    placeholder="" 
                                     name="video link"
                                     required
                                     />

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Client, ClientAdmin, TeacherProfile, StudentProfile, AdminClassroomAssignments
+from .models import Client, ClientAdmin, TeacherProfile, StudentProfile, AdminClassroomAssignments,AssignTest
 
 
 class ClientSerializers(serializers.ModelSerializer):
@@ -28,5 +28,11 @@ class StudentProfileSerializers(serializers.ModelSerializer):
 class AdminClassroomAssignmentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = AdminClassroomAssignments
+        fields = '__all__'
+
+
+class AssignTestSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AssignTest
         fields = '__all__'
 
