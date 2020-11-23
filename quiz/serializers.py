@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Question,Quiz, Choice
+from .models import Question,Quiz, Choice,DataQuestions,AnswerBank
 
 class StringSerializer(serializers.StringRelatedField):
     def to_internal_value(self, value):
@@ -29,7 +29,7 @@ class QuizSerializer(serializers.ModelSerializer):
         for q in data['questions']:
             newQ = Question()
             newQ.question = q['title']
-            newQ.order = order
+            newQ    .order = order
             newQ.save()
             for c in q['choices']:
                 getC, created = Choice.objects.get_or_create(title=c)
@@ -61,3 +61,13 @@ class QuizListSerializer (serializers.ModelSerializer):
     class Meta:
         model = Quiz
         fields = ('id', 'title', 'created_date','time',)
+
+class DataQuestionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DataQuestions
+        fields = '__all__'
+
+class AnswerBankSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnswerBank
+        fields = '__all__'

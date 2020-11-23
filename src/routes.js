@@ -17,7 +17,7 @@ import Signup from "./containers/Signup/Signup";
 import HomepageLayout from "./containers/Home/Home";
 import Header from "./components/Header/Header";
 import DataCT from './containers/DataCreationTool/index';
-
+import Exquiz from "./components/Examplequiz/Examplequiz"
 const BaseRouter = () => (
   <>
   <Hoc>
@@ -73,6 +73,10 @@ const BaseRouter = () => (
       <Route exact path="/Dct" component={DataCT} >
           <Header />
           <DataCT />
+      </Route>
+      <Route exact path="/samplequiz" component={Exquiz} >
+          <Header />
+          <Exquiz />
       </Route>
     <Route exact path="/login" component={Login}  style={{ backgroundColor: '#034BB7'}}/>
     <Route path="/signup" component={Signup} />

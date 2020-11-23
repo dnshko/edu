@@ -8,10 +8,161 @@ import {
     Button
 } from 'react-bootstrap';
 
+import axios from 'axios';
+import swal from 'sweetalert';
 
 export default class DataCT extends Component {
+    constructor() {
+        super();
+    
+        this.state = {
+        test_id: '',
+        test_type: '',
+        test_name:'',
+        answer_source_name:'',
+        description_short : '',
+        description_longh :'',
+        skill_covered :'',
+        section_type :'',
+        section_optional_count :'',
+        section_duration :'',
+        subject_category  :'',
+        question_num  :'',
+        question_complexity  :'',
+        question_type  :'',
+        question_header :'',
+        question_text  :'',
+        question_image  :'',
+        answer_type :'',
+        answer_1  :'',
+        answer_2  :'',
+        answer_3 :'',
+        answer_4  :'',
+        correct_answer_key  :'',
+        filter_1  :'',
+        step_1  :'',
+        step_2  :'',
+        Step_3  :'',
+        step_4  :'',
+        step_1  :'',
+        step_2  :'',
+        step_3_image :'',
+        step_4_image  :'',
+        all_steps  :'',
+        all_steps_image  :'',
+        steps_steps_video  :'',
+        steps_video  :'',
+        filler_1  :'',
+      }
+    }
+     
+    onChange = (e) => {
+        
+        this.setState({ [e.target.name]: e.target.value });   
+}
+    onSubmit = (e) => {
+        e.preventDefault();
+        // get our form data out of state
+        const { 
+        test_id,
+        test_type,
+        test_name,
+        answer_source_name,
+        description_short ,
+        description_long ,
+        skill_covered ,
+        section_type ,
+        section_optional_count ,
+        section_duration ,
+        subject_category  ,
+        question_num  ,
+        question_complexity ,
+        question_type  ,
+        question_header ,
+        question_text  ,
+        question_image  ,
+        answer_type ,
+        answer_1  ,
+        answer_2  ,
+        answer_3 ,
+        answer_4  ,
+        correct_answer_key  ,
+        filter_1  ,
+        step_1  ,
+        step_2  ,
+        Step_3  ,
+        step_4  ,
+        step_3_image,
+        step_4_image ,
+        all_steps ,
+        all_steps_image  ,
+        steps_steps_video  ,
+        steps_video  ,
+        filler_1  ,
+            
+        } = this.state;
 
+
+        axios.all([
+            axios.post(`http://127.0.0.1:8000/dataquestions`, {
+                test_id,
+                test_type,
+                answer_source_name,
+                description_short,
+                description_long,
+                question_num,
+                question_type,
+                subject_category,
+                Step_3,
+                step_4,
+                step_1,
+                step_2,
+                step_3_image,
+                step_4_image,
+                all_steps,
+                all_steps_image,
+                steps_steps_video,
+                steps_video,
+                filler_1,
+            }), 
+            axios.post('http://127.0.0.1:8000/answerbank', {
+                test_id,
+                test_type,
+                test_name,
+                description_short ,
+                description_long,
+                skill_covered,
+                section_type ,
+                section_optional_count ,
+                section_duration ,
+                subject_category ,
+                question_num  ,
+                question_complexity ,
+                question_type ,
+                question_header ,
+                question_text  ,
+                question_image ,
+                answer_type ,
+                answer_1 ,
+                answer_2 ,
+                answer_3 ,
+                answer_4 ,
+                correct_answer_key ,
+                filter_1  ,
+            })
+        ])
+          .then(function (response)  {
+               //access the results here....           
+            swal("success!", "Data added", "success").then(setInterval(function(){window.location.reload();},1500));// alert           
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+       
+      }
     render() {
+        const {test_name,description_short,question_header,question_text,answer_1,answer_2,answer_3,answer_4,step_1,step_2,step_3,step_4,all_steps,steps_video}= this.state;
         return (
             <div>
                      
@@ -28,8 +179,10 @@ export default class DataCT extends Component {
                                 <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Test Name </Form.Label>
                                 <Col style={{ textAlign: "left" }}>
                                     <Form.Control type="text"  id="Test Name" 
-                                    placeholder="" 
-                                    
+                                    placeholder=""   
+                                    value={test_name}
+                                     onChange={this.onChange}
+                                     name="test_name"                                 
                                     required 
                                     />
                                 </Col>
@@ -41,7 +194,9 @@ export default class DataCT extends Component {
                                 <Col  >
                                     <Form.Control type="text"  id="Test Desc" 
                                     placeholder="" 
-                                    
+                                    value={description_short}
+                                     onChange={this.description_short}
+                                     name="description_short"
                                     required
                                     />
                                 </Col>
@@ -167,11 +322,13 @@ export default class DataCT extends Component {
                     <Row className="row">
                         <Col lg={12} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Question Header: </Form.Label>
+                                <Form.Label htmlFor="question_header" className="col col-form-label" style={{ textAlign: "left" }}>Question Header: </Form.Label>
                                 <Col sm={11}>
-                                    <Form.Control type="text"  id="Test Name" 
+                                    <Form.Control type="text"  id="question_header" 
                                     placeholder="" 
-                                    name="Test Name"
+                                    value={question_header}
+                                     onChange={this.onChange}
+                                     name="question_header"
                                     required
                                     />
                                 </Col>
@@ -182,11 +339,13 @@ export default class DataCT extends Component {
                     <Row className="row">
                         <Col lg={12} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Test Name" className="col col-form-label" style={{ textAlign: "left" }}>Question Text </Form.Label>
+                                <Form.Label htmlFor="question_text" className="col col-form-label" style={{ textAlign: "left" }}>Question Text </Form.Label>
                                 <Col sm={11}>
-                                    <Form.Control type="text"  id="Test Name" 
-                                    placeholder="" 
-                                    name="Test Name"
+                                    <Form.Control type="text"  id="question_text" 
+                                    placeholder=""
+                                    value={question_text}
+                                     onChange={this.onChange}
+                                     name="question_text"
                                     required
                                     />
                                 </Col>
@@ -211,11 +370,13 @@ export default class DataCT extends Component {
                     <Row className="row justify-content-center">
                     <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer1 text " className="col col-form-label" style={{ textAlign: "left" }}>Answer1 text </Form.Label>
+                                <Form.Label htmlFor="answer_1 " className="col col-form-label" style={{ textAlign: "left" }}>Answer1 text </Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="Answer1 text " 
-                                    placeholder="" 
-                                    name="Answer1 text "
+                                    <Form.Control type="text"  id="answer_1 " 
+                                    placeholder=""
+                                    value={answer_1}
+                                     onChange={this.onChange}
+                                     name="answer_1"
                                     required
                                     />
                                 </Col>
@@ -223,11 +384,13 @@ export default class DataCT extends Component {
                         </Col>
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer2 text" className="col col-form-label">Answer2 text</Form.Label>
+                                <Form.Label htmlFor="answer_2" className="col col-form-label">Answer2 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="Answer2 text" 
+                                    <Form.Control type="text"  id="answer_2" 
                                     placeholder="" 
-                                    name="Answer2 text"
+                                    value={answer_2}
+                                     onChange={this.onChange}
+                                     name="answer_2"
                                     required
                                     />
                                 </Col>
@@ -235,11 +398,13 @@ export default class DataCT extends Component {
                         </Col>
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer3 text" className="col col-form-label">Answer3 text</Form.Label>
+                                <Form.Label htmlFor="answer_3" className="col col-form-label">Answer3 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="Answer3 text" 
+                                    <Form.Control type="text"  id="answer_3" 
                                     placeholder="" 
-                                    name="Answer3 text"
+                                    value={answer_3}
+                                     onChange={this.onChange}
+                                     name="answer_3"
                                     required
                                     />
                                 </Col>
@@ -247,11 +412,13 @@ export default class DataCT extends Component {
                         </Col>
                         <Col lg={3} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="Answer4 text" className="col col-form-label">Answer4 text </Form.Label>
+                                <Form.Label htmlFor="answer_4" className="col col-form-label">Answer4 text </Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="Answer4 text" 
+                                    <Form.Control type="text"  id="answer_4" 
                                     placeholder="Answer4 text" 
-                                    name="Answer4 text"
+                                    value={answer_4}
+                                     onChange={this.onChange}
+                                     name="answer_4"
                                     required
                                     />
                                 </Col>
@@ -262,11 +429,13 @@ export default class DataCT extends Component {
                     <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step1 text" className="col col-form-label" style={{ textAlign: "left" }}>step1 text</Form.Label>
+                                <Form.Label htmlFor="step_1" className="col col-form-label" style={{ textAlign: "left" }}>step1 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="step1 text" 
+                                    <Form.Control type="text"  id="step_1" 
                                     placeholder="" 
-                                    name="step1 text"
+                                    value={step_1}
+                                     onChange={this.onChange}
+                                     name="step_1"
                                     required
                                     />
                                 </Col>
@@ -283,18 +452,20 @@ export default class DataCT extends Component {
                             </Form.Group>
                         </Col>
                         <Col lg={4} sm={12}>
-                                <Button style={{background: "darkviolet",width: "200px"}}>Add</Button>
+                                <Button style={{background: "darkviolet",width: "200px"}} onClick={this.onSubmit}>Add</Button>
                         </Col>
                     </Row>
                      {/* row end */}
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step2 text" className="col col-form-label" style={{ textAlign: "left" }}>step2 text</Form.Label>
+                                <Form.Label htmlFor="step_2" className="col col-form-label" style={{ textAlign: "left" }}>step2 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="step2 text" 
+                                    <Form.Control type="text"  id="step_2" 
                                     placeholder="" 
-                                    name="step2 text"
+                                    value={step_2}
+                                     onChange={this.onChange}
+                                     name="step_2"
                                     required
                                     />
                                 </Col>
@@ -318,11 +489,13 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step3 text" className="col col-form-label" style={{ textAlign: "left" }}>step3 text</Form.Label>
+                                <Form.Label htmlFor="step_3" className="col col-form-label" style={{ textAlign: "left" }}>step3 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="step3 text" 
+                                    <Form.Control type="text"  id="step_3" 
                                     placeholder="" 
-                                    name="step3 text"
+                                    value={step_3}
+                                     onChange={this.onChange}
+                                     name="step_3"
                                     required
                                     />
                                 </Col>
@@ -346,11 +519,13 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="step4 text" className="col col-form-label" style={{ textAlign: "left" }}>step4 text</Form.Label>
+                                <Form.Label htmlFor="step_4" className="col col-form-label" style={{ textAlign: "left" }}>step4 text</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="step4 text" 
+                                    <Form.Control type="text"  id="step_4" 
                                     placeholder="" 
-                                    name="step4 text"
+                                    value={step_4}
+                                     onChange={this.onChange}
+                                     name="step_4"
                                     required
                                     />
                                 </Col>
@@ -378,7 +553,9 @@ export default class DataCT extends Component {
                                 <Col >
                                     <Form.Control type="text"  id="all steps text" 
                                     placeholder="" 
-                                    name="all steps text"
+                                    value={all_steps}
+                                     onChange={this.onChange}
+                                     name="all_steps"
                                     required
                                     />
                                 </Col>
@@ -399,11 +576,13 @@ export default class DataCT extends Component {
                      <Row className="row" >
                         <Col lg={4} sm={12}>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="video link" className="col col-form-label" style={{ textAlign: "left" }}>video link</Form.Label>
+                                <Form.Label htmlFor="steps_video" className="col col-form-label" style={{ textAlign: "left" }}>video link</Form.Label>
                                 <Col >
-                                    <Form.Control type="text"  id="video link" 
+                                    <Form.Control type="text"  id="steps_video" 
                                     placeholder="" 
-                                    name="video link"
+                                    value={steps_video}
+                                     onChange={this.onChange}
+                                     name="steps_video"
                                     required
                                     />
                                 </Col>

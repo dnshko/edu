@@ -651,3 +651,9 @@ iframe {
     padding-right: 15px;
   }
 }
+
+
+.error{
+  margin-left: 60%;
+  color:red;
+}

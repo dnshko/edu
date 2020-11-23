@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import QuizListSerializer, QuizSerializer
-from .models import Quiz
+from .serializers import QuizListSerializer, QuizSerializer, DataQuestionsSerializer, AnswerBankSerializer
+from .models import Quiz,DataQuestions,AnswerBank
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -64,3 +64,48 @@ class QuizCreateAPIView (CreateAPIView):
                 return Response(data={"data": quiz.id}, status=HTTP_201_CREATED)
         print(serializer.error)
         return Response(status=HTTP_400_BAD_REQUEST)
+
+
+
+class DataQuestionsAPIVIEW(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+    serializer_class = DataQuestionsSerializer
+    queryset = DataQuestions.objects.all()
+
+    lookup_field ='id'
+
+    def get(self, request , id = None):
+        if id:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, id=None):
+        return self.update(request, id)
+    
+    def delete(self, request, id):
+        return self.destroy(request, id)
+
+
+class AnswerBankAPIVIEW(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+    serializer_class = AnswerBankSerializer
+    queryset = AnswerBank.objects.all()
+
+    lookup_field ='id'
+
+    def get(self, request , id = None):
+        if id:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, id=None):
+        return self.update(request, id)
+    
+    def delete(self, request, id):
+        return self.destroy(request, id)

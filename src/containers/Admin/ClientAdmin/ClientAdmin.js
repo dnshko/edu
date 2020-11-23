@@ -13,6 +13,25 @@ import CustomButton from '../../../components/Button/Button';
 import CustomTextBox from '../../../components/TextBox/TextBox';
 import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
 
+
+
+const validEmailRegex = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
+const validPhoneNumberRegex = RegExp(
+  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+);
+// format ABCD-ABCD-ABCD-ABCD
+const validLicenceRegex = RegExp(
+  /^((.{4})\-(.{4})\-(.{4})\-(.{4}))$/g 
+);
+const validateForm = errors => {
+  let valid = true;
+  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  return valid;
+};
+
+
 class ClientAdmin extends Component{
     constructor() {
         super();
@@ -27,8 +46,16 @@ class ClientAdmin extends Component{
         licence:'',
         loginEmail:'',
         password:'',
+        confirm_password:'',
         client:[],
-        admins:[]
+        admins:[],
+        errors: {
+          FirstName: '',
+          Email: '',
+          licence: '',
+          password: '',
+          confirm_password:''
+        }
       }
     }
       componentDidMount() {
@@ -65,7 +92,41 @@ class ClientAdmin extends Component{
       }
      
     onChange = (e) => {
-
+      e.preventDefault();
+      const { name, value } = e.target;
+      let errors = this.state.errors;
+      
+      switch (name) {
+        case 'FirstName': 
+          errors.FirstName = 
+            value.length < 5
+              ? 'Full Name must be at least 5 characters long!'
+              : '';
+          break;
+        case 'Email': 
+          errors.Email = 
+            validEmailRegex.test(value)
+              ? ''
+              : 'Email is not valid!';
+          break;
+        case 'licence': 
+          errors.licence = 
+          validLicenceRegex.test(value)
+              ? ''
+              : 'License Key is not valid!';
+          break;
+        case  'confirm_password': 
+          errors.confirm_password = 
+          name.password !== name.confirm_password
+              ? ''
+              : 'License Key is not valid!';
+          break;
+        default:
+          break;
+      }
+      
+      
+  
         if(equals(e.target.name,"CliendAdmin")){
           
          const filterData =  head(this.getClientAdminName(this.state.admins,e.target.value))
@@ -82,7 +143,7 @@ class ClientAdmin extends Component{
             })
             return
         }
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ errors, [e.target.name]: e.target.value });
         console.log(e.target.value,'value')
     }
       
@@ -91,15 +152,22 @@ class ClientAdmin extends Component{
           // get our form data out of state
           const { Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password} = this.state;
   
-          axios.post('http://localhost:8000/clientadmin/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})                   
-              .then(function (response) {
-                    //access the results here....           
-                  swal("success!", "Admin added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
-                  console.log(response);// log
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+          if(validateForm(this.state.errors)) {
+            
+            console.info('Valid Form')
+            axios.post('http://localhost:8000/clientadmin/', {Client, FirstName, LastName, Email, licence, loginEmail, password ,confirm_password})                   
+            .then(function (response) {
+                  //access the results here....           
+                swal("success!", "Admin added", "success").then(setInterval(function(){window.location.reload();},1500));// alert
+                console.log(response);// log
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }else{
+            console.error('Invalid Form')
+          }
+         
         }
         onUpdate =() =>{
             const { ClientId,Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password} = this.state;
@@ -139,7 +207,7 @@ class ClientAdmin extends Component{
                 }
     
     render(){
-        const { Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password,clientadmin} = this.state;
+        const { Client,FirstName, LastName, Email, licence, loginEmail, password ,confirm_password,clientadmin,errors} = this.state;
         return(
             <>
                 
@@ -177,7 +245,7 @@ class ClientAdmin extends Component{
                             </Form.Group>
 
 {/* Custom Text Box  */}
-                            <CustomTextBox
+                            {/* <CustomTextBox
                              htFor="First Name" 
                              style="col col-form-label" 
                              txtBoxLabel="First Name" 
@@ -188,7 +256,7 @@ class ClientAdmin extends Component{
                              changeEvent={this.onChange}
                              txtBoxName={FirstName}
 
-                            />
+                            /> */}
 {/* Custom Text Box  End*/}
 {/* Reference field */}
                             <Form.Group as={Row}>
@@ -200,8 +268,12 @@ class ClientAdmin extends Component{
                                      onChange={this.onChange}
                                      name="FirstName"
                                      required
+                                     noValidate
                                      />
+                                     {errors.FirstName.length > 0 && 
+                                        <span className='error'>{errors.FirstName}</span>}
                                 </Col>
+                                
                             </Form.Group>
 {/* Reference field End */}
                             <Form.Group as={Row}>
@@ -225,7 +297,10 @@ class ClientAdmin extends Component{
                                      onChange={this.onChange}
                                      name="Email"
                                      required
+                                     noValidate
                                      />
+                                      {errors.Email.length > 0 && 
+                                        <span className='error'>{errors.Email}</span>}
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -237,7 +312,10 @@ class ClientAdmin extends Component{
                                     onChange={this.onChange}
                                     name="licence"
                                     required
+                                    noValidate
                                     />
+                                     {errors.licence.length > 0 && 
+                                        <span className='error'>{errors.licence}</span>}
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -261,19 +339,25 @@ class ClientAdmin extends Component{
                                      onChange={this.onChange}
                                      name="password"
                                      required
+                                     noValidate
                                      />
+                                     {errors.password && 
+                                        <span className='error'>{errors.password}</span>}
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Label htmlFor="password" className="col col-form-label">confirm password</Form.Label>
+                                <Form.Label htmlFor="confirm_password" className="col col-form-label">confirm password</Form.Label>
                                 <Col>
-                                    <Form.Control type="text"  id="password"
+                                    <Form.Control type="text"  id="confirm_password"
                                      placeholder="confirm password" 
                                      value={confirm_password}
                                      onChange={this.onChange}
                                      name="confirm_password"
                                      required
+                                     noValidate
                                      />
+                                     {errors.confirm_password && 
+                                        <span className='error'>{errors.confirm_password}</span>}
                                 </Col>
                             </Form.Group>
                         </Col>

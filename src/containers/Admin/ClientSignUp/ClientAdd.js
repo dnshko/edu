@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import States from '../../../components/states';
 import CustomButton from '../../../components/Button/Button';
+import CustomTextBox from '../../../components/TextBox/TextBox';
 import { pathOr, isEmpty, trim, lensPath, set, remove ,equals,head,filter,data} from 'ramda';
 
 import {
@@ -13,8 +14,24 @@ import {
 } from 'react-bootstrap';
 import swal from 'sweetalert';
 
+const validZipcodeRegex = RegExp(/^(\d{5})$/);
+const validAddressRegex = RegExp(/^(.{5,})$/);
+const validClientnameRegex = RegExp(/^[A-Z a-z0-9]+$/);
+const validFirstnameRegex = RegExp(/^[A-Z a-z0-9]+$/);
+const validMiddlenameRegex = RegExp(/^[A-Z a-z0-9]+$/);
+const validLastnameRegex = RegExp(/^[A-Z a-z0-9]+$/);
+const validMobileRegex = RegExp(/^\d{3}[- ]\d{3}[- ]\d{4}$/);
+const validEmailRegex = RegExp(/^[a-z0-9]{1,15}\.?[a-z0-9]{1,15}?@[a-z]{4,20}\.[a-z]{2,5}(\.[a-z]{2,})?$/);
+const validLicenseRegex = RegExp(/^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/);
+const validCityRegex = RegExp(/^[A-Z a-z0-9]+$/);
 
-class ClientAdd extends Component{
+const validateform = errors => {
+    let valid = true;
+    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+    return valid;
+  }
+
+  class ClientAdd extends Component{
     constructor() {
         super();
     
@@ -36,7 +53,22 @@ class ClientAdd extends Component{
         country: '',
         clientNameError: false,
         errortext: '',
-        client:[]
+        client:[],
+        errors:{
+            ClientName:'',
+            first_name:'',
+            middle_name:'',
+            last_name:'',
+            email:'',
+            mobile:'',
+            persion: '',
+            mobile1:'',
+            license_key:'',
+            zipcode:'',
+            city:'',
+            address:''
+  
+          }
       }
     }
     
@@ -69,8 +101,50 @@ class ClientAdd extends Component{
       
       
     onChange = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target
+        let errors = this.state.errors
+        switch(name){
+          case 'ClientName':
+             errors.ClientName=validClientnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+             break;
+          case 'address':
+             errors.address=validAddressRegex.test(value)?'':'Address is not Valid';
+             break;
+          case 'first_name':
+            errors.first_name=validFirstnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            break;
+          case 'middle_name':
+            errors.middle_name=validMiddlenameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            break;
+          case 'last_name':
+            errors.last_name=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            break;
+          case 'email':
+            errors.email=validEmailRegex.test(value)?'':'Email is not Valid';
+            break;
+          case 'mobile':
+            errors.mobile=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+            break;
+          case 'persion':
+            errors.persion=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            break;
+          case 'mobile1':
+            errors.mobile1=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+            break;
+          case 'license_key':
+            errors.license_key=validLicenseRegex.test(value)?'':'License Key is not Valid';
+            break;
+          case 'zipcode':
+            errors.zipcode= validZipcodeRegex.test(value)?'':'Zipcode is not Valid';
+            break;
+          case 'city':
+            errors.city=validCityRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            break;
+        }
+            
         
-            this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value });
        
         
         
@@ -80,7 +154,8 @@ class ClientAdd extends Component{
         // get our form data out of state
         const { ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
         
-        
+        if(validateform(this.state.errors)){   
+            console.log("valid form") 
         axios.post('http://localhost:8000/client/', { ClientName, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country })                   
             .then(function (response) {
                   //access the results here....           
@@ -90,7 +165,10 @@ class ClientAdd extends Component{
               .catch(function (error) {
                 console.log(error);
               });
-              
+            }
+            else{
+                console.log("Invalid Form")
+            }      
       }
       onUpdate =() =>{
         const {ClientId, ClientName,clientNameError, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country} = this.state;
@@ -119,7 +197,7 @@ class ClientAdd extends Component{
           });
      }
     render(){
-        const { ClientName,clientNameError,errortext, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country } = this.state;
+        const { errors,ClientName,clientNameError,errortext, first_name, middle_name, last_name, email, mobile,  persion,  mobile1,  license_key,  address,  city,  state, zipcode, country } = this.state;
         const optionObj =[
             'Alabama',
             'Alaska',
@@ -186,107 +264,124 @@ class ClientAdd extends Component{
                     <Card.Body className="card-body">
                         <Row className="row justify-content-center">
                             <Col  lg={6} >
-                                <Form.Group as={Row} >
-                                    <Form.Label htmlFor="Client Name" className="col col-form-label">Client Name</Form.Label>
-                                    <Col >
-                                        <Form.Control type="text"  id="Client Name" required
-                                            placeholder="Enter The Client Name" 
-                                            value={ClientName}
-                                            onChange={this.onChange}
-                                            name="ClientName"
-                                            />
-               
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} >
-                                    <Form.Label htmlFor="First Name" className="col col-form-label">First Name</Form.Label>
-                                    <Col>
-                                        <Form.Control type="text"  id="First Name" required
-                                            placeholder="Enter The First Name"   
-                                            value={first_name}                                          
-                                            onChange={this.onChange}                                            
-                                            name="first_name"
-                                            />
-                                   
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} >
-                                    <Form.Label htmlFor="Middle Name" className="col col-form-label">Middle Name</Form.Label>
-                                    <Col >
-                                        <Form.Control type="text"  id="Middle Name" required
-                                            placeholder="Enter The Middle Name"      
-                                            value={middle_name}                                      
-                                            onChange={this.onChange}                                            
-                                            name="middle_name"
-                                            />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} >
-                                    <Form.Label htmlFor="Last Name" className="col col-form-label">Last Name</Form.Label>
-                                    <Col >
-                                        <Form.Control type="text"  id="Last Name" required
-                                            placeholder="Enter The Last Name"   
-                                            value={last_name}                                          
-                                            onChange={this.onChange}                                            
-                                            name="last_name"
-                                            />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="Email" className="col col-form-label">Email</Form.Label>
-                                    <Col >
-                                        <Form.Control type="text"  id="Email" required
-                                        placeholder="Enter The Email"   
-                                        value={email}                                      
-                                        onChange={this.onChange}                                            
-                                        name="email"
-                                        /> 
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="Mobile" className="col col-form-label">Mobile</Form.Label>
-                                    <Col >
-                                        <Form.Control type="text"  id="Mobile" required
-                                         placeholder="Enter The Mobile" 
-                                         value={mobile}
-                                         onChange={this.onChange} 
-                                         name="mobile"
-                                         />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="contact person1" className="col col-form-label">Emergency contact person1</Form.Label>
-                                    <Col>
-                                        <Form.Control type="text"  id="contact person1" required
-                                        placeholder="Enter The Emergency contact person1"
-                                        value={persion}
-                                        onChange={this.onChange} 
-                                        name="persion"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="Mobile1" className="col col-form-label">Emergency Mobile1</Form.Label>
-                                    <Col>
-                                        <Form.Control type="text"  id="Mobile1" required
-                                        placeholder="Enter The Emergency Mobile1"
-                                        value={mobile1}
-                                        onChange={this.onChange} 
-                                        name="mobile1"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="License key" className="col col-form-label">License key</Form.Label >
-                                    <Col>
-                                        <Form.Control type="text"  id="License key"  required
-                                        placeholder="Enter The License key"
-                                        value={license_key}
-                                        onChange={this.onChange} 
-                                        name="license_key"
-                                        />
-                                    </Col>
-                                </Form.Group>
+
+                                {errors.ClientName.length>0 && <span className="error">{errors.ClientName}</span>}
+                                <CustomTextBox
+                                    htFor="Client Name" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="Client Name"
+                                    txtBoxType="text"
+                                    txtBoxID="Client Name" 
+                                    txtBoxPH="Enter The Client Name" 
+                                    txtBoxValue={ClientName}
+                                    changeEvent={this.onChange}
+                                    txtBoxName="ClientName"
+                                  
+                                />
+                                {errors.first_name.length>0 && <span className="error">{errors.first_name}</span>}
+                                <CustomTextBox
+                                    htFor="First Name" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="First Name"
+                                    txtBoxType="text"
+                                    txtBoxID="First Name"
+                                    txtBoxPH="Enter The First Name"   
+                                    txtBoxValue={first_name}                                          
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="first_name"
+                                />
+
+                                {errors.middle_name.length>0 && <span className="error">{errors.middle_name}</span>}   
+                                <CustomTextBox
+                                    htFor="Middle Name" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="Middle Name"
+                                    txtBoxType="text" 
+                                    txtBoxID="Middle Name"
+                                    txtBoxPH="Enter The Middle Name"      
+                                    txtBoxValue={middle_name}                                      
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="middle_name"
+                                />
+
+                                {errors.last_name.length>0 && <span className="error">{errors.last_name}</span>} 
+                                <CustomTextBox
+                                    htFor="Last Name"
+                                    style="col col-form-label"
+                                    txtBoxLabel="Last Name"
+                                    txtBoxType="text"
+                                    txtBoxID="Last Name"
+                                    txtBoxPH="Enter The Last Name"   
+                                    txtBoxValue={last_name}                                          
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="last_name"
+                                />
+                                
+                                {errors.email.length>0 && <span className="error">{errors.email}</span>}
+                                <CustomTextBox
+                                    htFor="Email" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="Email"
+                                    txtBoxType="email"  
+                                    txtBoxID="Email"
+                                    txtBoxPH="Enter The Email"   
+                                    txtBoxValue={email}                                      
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="email"
+                                /> 
+                                
+                                {errors.mobile.length>0 && <span className="error">{errors.mobile}</span>}
+                                <CustomTextBox
+                                    htFor="Mobile" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="Mobile"
+                                    txtBoxType="text"  
+                                    txtBoxID ="Mobile"
+                                    txtBoxPH="xxx-xxx-xxxx"
+                                    txtBoxValue={mobile}
+                                    changeEvent={this.onChange} 
+                                    txtBoxName="mobile"
+                                />
+                                    
+                                {errors.persion.length>0 && <span className="error">{errors.persion}</span>}
+                                <CustomTextBox
+                                    htFor="contact person1" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="Emergency contact person1"
+                                    txtBoxType="text"
+                                    txtBoxID="contact person1" 
+                                    txtBoxPH="Enter The Emergency contact person1"
+                                    txtBoxValue={persion}
+                                    changeEvent={this.onChange} 
+                                    txtBoxName="persion"
+                                />
+    
+                                {errors.mobile1.length>0 && <span className="error">{errors.mobile1}</span>}
+                                <CustomTextBox
+                                    htFor="Mobile1"
+                                    style="col col-form-label"
+                                    txtBoxLabel="Emergency Mobile1"
+                                    txtBoxType="text"  
+                                    txtBoxID="Mobile1"
+                                    txtBoxPH="xxx-xxx-xxxx"
+                                    txtBoxValue={mobile1}
+                                    changeEvent={this.onChange} 
+                                    txtBoxName="mobile1"
+                                />
+        
+                                {errors.license_key.length>0 && <span className="error">{errors.license_key}</span>}
+                                <CustomTextBox
+                                    htFor="License key" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="License key"
+                                    txtBoxType="text"  
+                                    txtBoxID="License key" 
+                                    txtBoxPH="xxxx-xxxx-xxxx-xxxx" 
+                                    txtBoxValue={license_key}
+                                    changeEvent={this.onChange} 
+                                    txtBoxName="license_key"
+                                />
+                                    
                             </Col>
                             <Col lg={6}>
                                 <Form.Group as={Row}>
@@ -309,28 +404,34 @@ class ClientAdd extends Component{
                                         </Form.Control>
                                     </Col>
                                 </Form.Group>                                
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="city" className="col col-form-label" required>city</Form.Label>
-                                    <Col>
-                                        <Form.Control type="text"  id="city" 
-                                        placeholder="Enter The city"
-                                        value={city}                                         
-                                        onChange={this.onChange}                                            
-                                        name="city"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row}>
-                                    <Form.Label htmlFor="zip code" className="col col-form-label" required>zip code</Form.Label>
-                                    <Col>
-                                        <Form.Control type="text"  id="zip code" 
-                                        placeholder="Enter The zip code"
-                                        value={zipcode}                                         
-                                        onChange={this.onChange}                                            
-                                        name="zipcode"
-                                        />
-                                    </Col>
-                                </Form.Group>
+                                
+                                {errors.city.length>0 && <span className="error">{errors.city}</span>}
+                                <CustomTextBox
+                                    htFor="city" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="city"
+                                    txtBoxType="text"  
+                                    txtBoxID="city" 
+                                    txtBoxPH="Enter The city"
+                                    txtBoxValue={city}                                         
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="city"
+                                />
+                                
+                                {errors.zipcode.length>0 && <span className="error">{errors.zipcode}</span>}
+                                <CustomTextBox
+                                    htFor="zip code" 
+                                    style="col col-form-label"
+                                    txtBoxLabel="zip code"
+                                    txtBoxType="text"  
+                                    txtBoxID="zip code" 
+                                    txtBoxPH="Enter The zip code"
+                                    txtBoxValue={zipcode}                                         
+                                    changeEvent={this.onChange}                                            
+                                    txtBoxName="zipcode"
+                                />
+                            
+                            {errors.address.length>0 && <span className="error">{errors.address}</span>}
                                 <Form.Group as={Row}>
                                     <Form.Label htmlFor="address" className="col col-form-label" required>Address</Form.Label>
                                     <Col>
@@ -340,6 +441,7 @@ class ClientAdd extends Component{
                                             onChange={this.onChange}                                            
                                             name="address"
                                             ></textarea>
+                                            
                                     </Col>
                                 </Form.Group>
                             </Col>                            
