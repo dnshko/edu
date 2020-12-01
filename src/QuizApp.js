@@ -19,7 +19,7 @@ class QuizApp extends Component {
       { id: 'data/csharp.json', name: 'C Sharp' },
       { id: 'data/designPatterns.json', name: 'Design Patterns' }
     ],
-    quizId: 'http://localhost:8000/quiz/1'
+    quizId: 'data/javascript.json'
   };
 
   pager = {
@@ -34,14 +34,16 @@ class QuizApp extends Component {
 
   load(quizId) {
     let url = quizId || this.props.quizId;
+    console.log('url',url);
     fetch(`../${url}`).then(res => res.json()).then(res => {
-      let quiz = res;
-      quiz.questions.forEach(q => {
-        q.options.forEach(o => o.selected = false);
+      res.quiz.question_set.forEach(q => {
+        q.answer_set.forEach(o => o.selected = false);
       });
-      quiz.config = Object.assign(this.props.quiz.config || {}, quiz.config);
-      this.pager.count = quiz.questions.length / this.pager.size;
-      this.props.onQuizLoad(quiz);
+      res.quiz.config = Object.assign(this.props.quiz.config || {}, res.quiz.config);
+      // console.log(' quiz.config', quiz.config);
+
+      this.pager.count = res.quiz.question_set.length / this.pager.size;
+      this.props.onQuizLoad(res);
       this.props.onPagerUpdate(this.pager);
     });
   }
@@ -52,6 +54,7 @@ class QuizApp extends Component {
   }
 
   render() {
+    console.log('quix',this.state.quiz)
     return (
       <div className="container">
         <div class="card">

@@ -657,3 +657,10 @@ iframe {
   margin-left: 60%;
   color:red;
 }
+
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: not-allowed;
+}

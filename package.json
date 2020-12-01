@@ -9,6 +9,7 @@
     "antd": "^3.25.1",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
     "npm-check-updates": "^10.0.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.27.1",

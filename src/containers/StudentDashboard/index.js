@@ -19,14 +19,14 @@ class AssignTest extends Component{
     
         this.state = {  
             Available_Test:'',
-            showResults: false,
+            showResults: true,
             quizs:[]
       }
     }
     
     componentDidMount() {
        
-        axios.get(`http://localhost:8000/test/`)
+        axios.get(`http://localhost:8000/api/my-quizzes`)
         .then(res => {
           const quizs = res.data;
           this.setState({ quizs });
@@ -63,7 +63,7 @@ class AssignTest extends Component{
                                     <Form.Control as="select" custom className="selectStyle" id="test to take" name="Available_Test"  onChange={this.onChange} required>
                                                 <option selected disabled>test to take</option>
                                                 { this.state.quizs.map(quizs =>
-                                             <option key={quizs.id} value={quiz => quizs.id}>{quizs.Available_Test}</option>
+                                             <option key={quizs.id} value={quiz => quizs.id}>{quizs.name}</option>
                                             
                                              )}  
                                      </Form.Control>

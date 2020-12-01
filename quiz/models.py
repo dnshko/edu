@@ -1,93 +1,65 @@
+from django.conf import settings
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 
-# Create your models here.
+
 class Quiz(models.Model):
-    title = models.CharField(max_length=50)
-    time = models.IntegerField()
-    created_date = models.DateField(auto_now_add=True)
-    total_marks = models.PositiveIntegerField()
+	name = models.CharField(max_length=100)
+	description = models.CharField(max_length=70)
+	image = models.ImageField()
+	slug = models.SlugField(blank=True)
+	roll_out = models.BooleanField(default=False)
+	timestamp = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
+	class Meta:
+		ordering = ['timestamp',]
+		verbose_name_plural = "Quizzes"
 
-
-class Choice(models.Model):
-    title = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.title
+	def __str__(self):
+		return self.name
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=200)
-    choices = models.ManyToManyField(Choice)
-    answer = models.ForeignKey(
-        Choice, on_delete=models.CASCADE, related_name='answer', blank=True, null=True)
-    quiz = models.ForeignKey(
-        Quiz, on_delete=models.CASCADE,  related_name='questions', blank=True, null=True)
-    order = models.SmallIntegerField()
+	quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+	label = models.CharField(max_length=100)
+	order = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.question
+	def __str__(self):
+		return self.label
 
 
-class DataQuestions(models.Model):
-    """
-    Test info
-    """
-    test_id = models.CharField(max_length=64, null=True,blank=True)
-    test_type = models.CharField(max_length=64, null=True,blank=True)
-    test_name = models.CharField(max_length=64, null=True,blank=True)
-    description_short = models.CharField(max_length=64, null=True,blank=True)
-    description_long = models.CharField(max_length=64, null=True,blank=True)
-    skill_covered = models.CharField(max_length=64, null=True,blank=True)
-    section_type = models.CharField(max_length=64, null=True,blank=True)
-    section_optional = models.CharField(max_length=64, null=True,blank=True)
-    section_question_count = models.CharField(max_length=64, null=True,blank=True)
-    section_duration = models.CharField(max_length=64, null=True,blank=True)
-    subject_category = models.CharField(max_length=64, null=True,blank=True)
-    question_num = models.CharField(max_length=64, null=True,blank=True)
-    question_complexity = models.CharField(max_length=64, null=True,blank=True)
-    question_type = models.CharField(max_length=64, null=True,blank=True)
-    question_header = models.CharField(max_length=64, null=True,blank=True)
-    question_text = models.CharField(max_length=64, null=True,blank=True)
-    question_image =models.CharField(max_length=64, null=True,blank=True)
-    answer_type = models.CharField(max_length=64, null=True,blank=True)
-    answer_1 = models.CharField(max_length=64, null=True,blank=True)
-    answer_2 = models.CharField(max_length=64, null=True,blank=True)
-    answer_3 = models.CharField(max_length=64, null=True,blank=True)
-    answer_4 =models.CharField(max_length=64, null=True,blank=True)
-    correct_answer_key = models.CharField(max_length=64, null=True,blank=True)
-    filter_1 =models.CharField(max_length=64, null=True,blank=True)
+class Answer(models.Model):
+	question = models.ForeignKey(Question, on_delete=models.CASCADE)
+	label = models.CharField(max_length=100)
+	is_correct = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.test_id
+	def __str__(self):
+		return self.label
 
 
-class AnswerBank(models.Model):
-    """
-    Master Answer Bank
-    """
-    test_id = models.CharField(max_length=64, null=True,blank=True)
-    test_type = models.CharField(max_length=64, null=True,blank=True)
-    answer_source_name = models.CharField(max_length=64, null=True,blank=True)
-    description_short = models.CharField(max_length=64, null=True,blank=True)
-    description_long  = models.CharField(max_length=64, null=True,blank=True)
-    question_num = models.CharField(max_length=64, null=True,blank=True)
-    question_type = models.CharField(max_length=64, null=True,blank=True)
-    subject_category = models.CharField(max_length=64, null=True,blank=True)
-    step_1 = models.CharField(max_length=64, null=True,blank=True)
-    step_2 = models.CharField(max_length=64, null=True,blank=True)
-    Step_3 = models.CharField(max_length=64, null=True,blank=True)
-    step_4 = models.CharField(max_length=64, null=True,blank=True)
-    step_1_image = models.CharField(max_length=64, null=True,blank=True)
-    step_2_image = models.CharField(max_length=64, null=True,blank=True)
-    step_3_image = models.CharField(max_length=64, null=True,blank=True)
-    step_4_image = models.CharField(max_length=64, null=True,blank=True)
-    all_steps = models.CharField(max_length=64, null=True,blank=True)
-    all_steps_image = models.CharField(max_length=64, null=True,blank=True)
-    steps_video = models.CharField(max_length=64, null=True,blank=True)
-    filler_1 = models.CharField(max_length=64, null=True,blank=True)
+class QuizTaker(models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+	score = models.IntegerField(default=0)
+	completed = models.BooleanField(default=False)
+	date_finished = models.DateTimeField(null=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.test_id
+	def __str__(self):
+		return self.user.email
+
+
+class UsersAnswer(models.Model):
+	quiz_taker = models.ForeignKey(QuizTaker, on_delete=models.CASCADE)
+	question = models.ForeignKey(Question, on_delete=models.CASCADE)
+	answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True)
+
+	def __str__(self):
+		return self.question.label
+
+
+@receiver(pre_save, sender=Quiz)
+def slugify_name(sender, instance, *args, **kwargs):
+	instance.slug = slugify(instance.name)

@@ -1,8 +1,20 @@
-import React from 'react';
+import React,{ useState }  from 'react';
 import './Result.css';
 function Result(props) {
     let questions = props.questions;
-    questions.forEach(q => { q.isCorrect = q.options.every(x => x.selected === x.isAnswer); })
+    console.log('questissons',questions)
+    questions.forEach(q => { q.isCorrect = q.answer_set.every(x => x.selected === x.isAnswer); })
+    const [modal, setModal] = useState(false);
+//   onChange = (e)=>{
+//     this.setState({
+//       modalShow :true,
+//     })
+//   }
+//   onHide=(e)=>{
+//     this.setState({
+//       modalShow :false,
+//     })
+//   }
 
     return (
     
@@ -29,12 +41,12 @@ function Result(props) {
                     <div class="row">
                         <div class="col-lg-8 sm-8">
                     <div className="result-question" style={{backgroundColor : `${q.isCorrect ? 'alert-success' : 'alert-danger'}`}}>
-                        <h5 style={{Color : `${q.isCorrect ? 'alert-success' : 'alert-danger'}`}}>  <span  className="numberBg">{index + 1}</span> {q.name}</h5>
+                        <h5 style={{Color : `${q.isCorrect ? 'alert-success' : 'alert-danger'}`}}>  <span  className="numberBg">{index + 1}</span> {q.label}</h5>
                         <div className="row">
                             {
-                                q.options.map(option =>
+                                q.answer_set.map(option =>
                                     <div key={option.id} className="col-6">
-                                        <input id={option.id} type="checkbox" disabled="disabled" checked={(option.selected && option.isAnswer)}  className="option-input radio"  /> {option.name}
+                                        <input id={option.id} type="checkbox" disabled="disabled" checked={(option.selected && option.isAnswer)}  className="option-input radio"  /> {option.label}
                                     </div>
                                 )
                             }
@@ -44,7 +56,7 @@ function Result(props) {
                     
                     <div class="col-lg-4 sm-4">
                                    
-                                   <button className="btnResult btn-primary ">view steps</button>                                  
+                                   <button className="btnResult btn-primary " onClick={() => setModal(true)}>view steps</button>                                  
                                    <button className="btnResult btn-primary ">view video</button>
                        
                </div>

@@ -40,12 +40,14 @@ class Quiz extends Component {
     setMode = (e) => this.props.onSubmit(e.target.id);
 
     renderMode() {
+        const quiz = this.props.quiz.quiz;
+        console.log('quiz',quiz)
         if (this.props.mode === 'quiz') {
             return (<Questions move={this.move} />)
         } else if (this.props.mode === 'review') {
-            return (<Review quiz={this.props.quiz} move={this.move} />)
+            return (<Review quiz={  quiz} move={this.move} />)
         } else {
-            return (<Result questions={this.props.quiz.questions || []} />)
+            return (<Result questions={ quiz.question_set || []} />)
         }
     }
 

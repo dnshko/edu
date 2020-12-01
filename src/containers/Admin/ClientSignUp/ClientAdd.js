@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import States from '../../../components/states';
 import CustomButton from '../../../components/Button/Button';
 import CustomTextBox from '../../../components/TextBox/TextBox';
@@ -106,40 +107,211 @@ const validateform = errors => {
         let errors = this.state.errors
         switch(name){
           case 'ClientName':
-             errors.ClientName=validClientnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            // errors.ClientName=validClientnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+             $('#ClientName').focusout(function(){
+              if(validClientnameRegex.test(value)){ 
+              //  errors.ClientName = '';
+                $('#ClientName').css('border', '1px solid green')
+                $('#clnamesuccess').css('display','block')
+                $('#clnamefail').css('display','none')
+                $('#clnameerror').css('display','none')
+              }
+              else{
+              //  errors.ClientName = 'Name shouldn\'t contain special characters!';
+                $('#ClientName').css('border', '1px solid red')
+                $('#clnamefail').css('display','block')
+                $('#clnamesuccess').css('display','none')
+                $('#clnameerror').css('display','block')
+              }
+          })
              break;
           case 'address':
-             errors.address=validAddressRegex.test(value)?'':'Address is not Valid';
+            // errors.address=validAddressRegex.test(value)?'':'Address is not Valid';
+             $('#address').focusout(function(){
+              if(validAddressRegex.test(value)){ 
+                $('#address').css('border', '1px solid green')
+                $('#addsuccess').css('display','block')
+                $('#addfail').css('display','none')
+                $('#adderror').css('display','none')
+              }
+              else{
+                $('#address').css('border', '1px solid red')
+                $('#addfail').css('display','block')
+                $('#addsuccess').css('display','none')
+                $('#adderror').css('display','block')
+              }
+          })
              break;
           case 'first_name':
-            errors.first_name=validFirstnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+          //  errors.first_name=validFirstnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            $('#FirstName').focusout(function(){
+              if(validFirstnameRegex.test(value)){ 
+                $('#FirstName').css('border', '1px solid green')
+                $('#fnamesuccess').css('display','block')
+                $('#fnamefail').css('display','none')
+                $('#fnameerror').css('display','none')
+              }
+              else{
+                $('#FirstName').css('border', '1px solid red')
+                $('#fnamefail').css('display','block')
+                $('#fnamesuccess').css('display','none')
+                $('#fnameerror').css('display','block')
+              }
+          })
             break;
           case 'middle_name':
-            errors.middle_name=validMiddlenameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+          //  errors.middle_name=validMiddlenameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            $('#MiddleName').focusout(function(){
+              if(validMiddlenameRegex.test(value)){ 
+                $('#MiddleName').css('border', '1px solid green')
+                $('#mdnamesuccess').css('display','block')
+                $('#mdnamefail').css('display','none')
+                $('#mdnameerror').css('display','none')
+              }
+              else{
+                $('#MiddleName').css('border', '1px solid red')
+                $('#mdnamefail').css('display','block')
+                $('#mdnamesuccess').css('display','none')
+                $('#mdnameerror').css('display','block')
+              }
+          })
             break;
           case 'last_name':
-            errors.last_name=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+           // errors.last_name=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            $('#LastName').focusout(function(){
+              if(validLastnameRegex.test(value)){ 
+                $('#LastName').css('border', '1px solid green')
+                $('#lnamesuccess').css('display','block')
+                $('#lnamefail').css('display','none')
+                $('#lnameerror').css('display','none')
+              }
+              else{
+                $('#LastName').css('border', '1px solid red')
+                $('#lnamefail').css('display','block')
+                $('#lnamesuccess').css('display','none')
+                $('#lnameerror').css('display','block')
+              }
+          })
             break;
           case 'email':
-            errors.email=validEmailRegex.test(value)?'':'Email is not Valid';
+          // errors.email=validEmailRegex.test(value)?'':'Email is not Valid';
+            $('#Email').focusout(function(){
+              if(validEmailRegex.test(value)){ 
+                $('#Email').css('border', '1px solid green')
+                $('#emailsuccess').css('display','block')
+                $('#emailfail').css('display','none')
+                $('#emailerror').css('display','none')
+              }
+              else{
+                $('#Email').css('border', '1px solid red')
+                $('#emailfail').css('display','block')
+                $('#emailsuccess').css('display','none')
+                $('#emailerror').css('display','block')
+              }
+          })
             break;
           case 'mobile':
-            errors.mobile=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+          //  errors.mobile=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+            $('#Mobile').focusout(function(){
+              if(validMobileRegex.test(value)){ 
+                $('#Mobile').css('border', '1px solid green')
+                $('#mobsuccess').css('display','block')
+                $('#mobfail').css('display','none')
+                $('#moberror').css('display','none')
+              }
+              else{
+                $('#Mobile').css('border', '1px solid red')
+                $('#mobfail').css('display','block')
+                $('#mobsuccess').css('display','none')
+                $('#moberror').css('display','block')
+
+              }
+          })
             break;
           case 'persion':
-            errors.persion=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+          //  errors.persion=validLastnameRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            $('#persion').focusout(function(){
+              if(validLastnameRegex.test(value)){ 
+                $('#persion').css('border', '1px solid green')
+                $('#persuccess').css('display','block')
+                $('#perfail').css('display','none')
+                $('#pererror').css('display','none')
+              }
+              else{
+                $('#persion').css('border', '1px solid red')
+                $('#perfail').css('display','block')
+                $('#persuccess').css('display','none')
+                $('#pererror').css('display','block')
+              }
+          })
             break;
           case 'mobile1':
-            errors.mobile1=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+          //  errors.mobile1=validMobileRegex.test(value)?'':'Mobile Number is not Valid';
+            $('#Mobile1').focusout(function(){
+              if(validMobileRegex.test(value)){ 
+                $('#Mobile1').css('border', '1px solid green')
+                $('#m1success').css('display','block')
+                $('#m1fail').css('display','none')
+                $('#m1error').css('display','none')
+              }
+              else{
+                $('#Mobile1').css('border', '1px solid red')
+                $('#m1fail').css('display','block')
+                $('#m1success').css('display','none')
+                $('#m1error').css('display','block')
+              }
+          })
             break;
           case 'license_key':
-            errors.license_key=validLicenseRegex.test(value)?'':'License Key is not Valid';
+          //  errors.license_key=validLicenseRegex.test(value)?'':'License Key is not Valid';
+            $('#Licensekey').focusout(function(){
+              if(validLicenseRegex.test(value)){ 
+                $('#Licensekey').css('border', '1px solid green')
+                $('#lkeysuccess').css('display','block')
+                $('#lkeyfail').css('display','none')
+                $('#lkeyerror').css('display','none')
+              }
+              else{
+                $('#Licensekey').css('border', '1px solid red')
+                $('#lkeyfail').css('display','block')
+                $('#lkeysuccess').css('display','none')
+                $('#lkeyerror').css('display','block')
+              }
+          })
             break;
           case 'zipcode':
-            errors.zipcode= validZipcodeRegex.test(value)?'':'Zipcode is not Valid';
+          //  errors.zipcode= validZipcodeRegex.test(value)?'':'Zipcode is not Valid';
+            $('#zipcode').focusout(function(){
+              if( validZipcodeRegex.test(value)){ 
+                $('#zipcode').css('border', '1px solid green')
+                $('#zcodesuccess').css('display','block')
+                $('#zcodefail').css('display','none')
+                $('#zcodeerror').css('display','none')
+              }
+              else{
+                $('#zipcode').css('border', '1px solid red')
+                $('#zcodefail').css('display','block')
+                $('#zcodesuccess').css('display','none')
+                $('#zcodeerror').css('display','block')
+              }
+          })
             break;
           case 'city':
-            errors.city=validCityRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+          //  errors.city=validCityRegex.test(value)?'':'Name shouldn\'t contain special characters!';
+            $('#city').focusout(function(){
+              if(validCityRegex.test(value)){ 
+                $('#city').css('border', '1px solid green')
+                $('#citysuccess').css('display','block')
+                $('#cityfail').css('display','none')
+                $('#cityerror').css('display','none')
+              }
+              else{
+                $('#city').css('border', '1px solid red')
+                $('#cityfail').css('display','block')
+                $('#citysuccess').css('display','none')
+                $('#cityerror').css('display','block')
+              }
+          })
             break;
         }
             
@@ -265,59 +437,73 @@ const validateform = errors => {
                         <Row className="row justify-content-center">
                             <Col  lg={6} >
 
-                                {errors.ClientName.length>0 && <span className="error">{errors.ClientName}</span>}
+                                <span style={{display:"none"}} className="error" id="clnameerror">Name Shouldn't contain special characters!</span>
+                                <i className="fa fa-check" id="clnamesuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="clnamefail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="Client Name" 
                                     style="col col-form-label"
                                     txtBoxLabel="Client Name"
                                     txtBoxType="text"
-                                    txtBoxID="Client Name" 
+                                    txtBoxID="ClientName" 
                                     txtBoxPH="Enter The Client Name" 
                                     txtBoxValue={ClientName}
                                     changeEvent={this.onChange}
                                     txtBoxName="ClientName"
-                                  
                                 />
-                                {errors.first_name.length>0 && <span className="error">{errors.first_name}</span>}
+
+                                {/*{errors.first_name.length>0 && <span className="error">{errors.first_name}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="fnameerror">Name Shouldn't contain special characters!</span>
+                                <i className="fa fa-check" id="fnamesuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="fnamefail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="First Name" 
                                     style="col col-form-label"
                                     txtBoxLabel="First Name"
                                     txtBoxType="text"
-                                    txtBoxID="First Name"
+                                    txtBoxID="FirstName"
                                     txtBoxPH="Enter The First Name"   
                                     txtBoxValue={first_name}                                          
                                     changeEvent={this.onChange}                                            
                                     txtBoxName="first_name"
                                 />
 
-                                {errors.middle_name.length>0 && <span className="error">{errors.middle_name}</span>}   
+                               {/*{errors.middle_name.length>0 && <span className="error">{errors.middle_name}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="mdnameerror">Name Shouldn't contain special characters!</span>
+                                <i className="fa fa-check" id="mdnamesuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="mdnamefail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>  
                                 <CustomTextBox
                                     htFor="Middle Name" 
                                     style="col col-form-label"
                                     txtBoxLabel="Middle Name"
                                     txtBoxType="text" 
-                                    txtBoxID="Middle Name"
+                                    txtBoxID="MiddleName"
                                     txtBoxPH="Enter The Middle Name"      
                                     txtBoxValue={middle_name}                                      
                                     changeEvent={this.onChange}                                            
                                     txtBoxName="middle_name"
                                 />
 
-                                {errors.last_name.length>0 && <span className="error">{errors.last_name}</span>} 
+                                {/*{errors.last_name.length>0 && <span className="error">{errors.last_name}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="lnameerror">Name Shouldn't contain special characters!</span>
+                                <i className="fa fa-check" id="lnamesuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="lnamefail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="Last Name"
                                     style="col col-form-label"
                                     txtBoxLabel="Last Name"
                                     txtBoxType="text"
-                                    txtBoxID="Last Name"
+                                    txtBoxID="LastName"
                                     txtBoxPH="Enter The Last Name"   
                                     txtBoxValue={last_name}                                          
                                     changeEvent={this.onChange}                                            
                                     txtBoxName="last_name"
                                 />
                                 
-                                {errors.email.length>0 && <span className="error">{errors.email}</span>}
+                                {/*{errors.email.length>0 && <span className="error">{errors.email}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="emailerror">Email is not Valid!</span>
+                                <i className="fa fa-check" id="emailsuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="emailfail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="Email" 
                                     style="col col-form-label"
@@ -330,7 +516,10 @@ const validateform = errors => {
                                     txtBoxName="email"
                                 /> 
                                 
-                                {errors.mobile.length>0 && <span className="error">{errors.mobile}</span>}
+                                {/*{errors.mobile.length>0 && <span className="error">{errors.mobile}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="moberror">Mobile number is not Valid!</span>
+                                <i className="fa fa-check" id="mobsuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="mobfail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="Mobile" 
                                     style="col col-form-label"
@@ -343,20 +532,26 @@ const validateform = errors => {
                                     txtBoxName="mobile"
                                 />
                                     
-                                {errors.persion.length>0 && <span className="error">{errors.persion}</span>}
+                                {/*{errors.persion.length>0 && <span className="error">{errors.persion}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="pererror">Name Shouldn't contain special characters!</span>
+                                <i className="fa fa-check" id="persuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="perfail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="contact person1" 
                                     style="col col-form-label"
                                     txtBoxLabel="Emergency contact person1"
                                     txtBoxType="text"
-                                    txtBoxID="contact person1" 
+                                    txtBoxID="persion" 
                                     txtBoxPH="Enter The Emergency contact person1"
                                     txtBoxValue={persion}
                                     changeEvent={this.onChange} 
                                     txtBoxName="persion"
                                 />
     
-                                {errors.mobile1.length>0 && <span className="error">{errors.mobile1}</span>}
+                                {/*{errors.mobile1.length>0 && <span className="error">{errors.mobile1}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="m1error">Mobile number is not Valid!</span>
+                                <i className="fa fa-check" id="m1success" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="m1fail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="Mobile1"
                                     style="col col-form-label"
@@ -369,13 +564,16 @@ const validateform = errors => {
                                     txtBoxName="mobile1"
                                 />
         
-                                {errors.license_key.length>0 && <span className="error">{errors.license_key}</span>}
+                                {/*{errors.license_key.length>0 && <span className="error">{errors.license_key}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="lkeyerror">License Key is not Valid!</span>
+                                <i className="fa fa-check" id="lkeysuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="lkeyfail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="License key" 
                                     style="col col-form-label"
                                     txtBoxLabel="License key"
                                     txtBoxType="text"  
-                                    txtBoxID="License key" 
+                                    txtBoxID="Licensekey" 
                                     txtBoxPH="xxxx-xxxx-xxxx-xxxx" 
                                     txtBoxValue={license_key}
                                     changeEvent={this.onChange} 
@@ -405,7 +603,10 @@ const validateform = errors => {
                                     </Col>
                                 </Form.Group>                                
                                 
-                                {errors.city.length>0 && <span className="error">{errors.city}</span>}
+                                {/*{errors.city.length>0 && <span className="error">{errors.city}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="cityerror">City Name is not Valid!</span>
+                                <i className="fa fa-check" id="citysuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="cityfail" style={{position:"relative",left:"93%",top:"3%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="city" 
                                     style="col col-form-label"
@@ -418,20 +619,26 @@ const validateform = errors => {
                                     txtBoxName="city"
                                 />
                                 
-                                {errors.zipcode.length>0 && <span className="error">{errors.zipcode}</span>}
+                                {/*{errors.zipcode.length>0 && <span className="error">{errors.zipcode}</span>}*/}
+                                <span style={{display:"none"}} className="error" id="zcodeerror">Zipcode is not Valid!</span>
+                                <i className="fa fa-check" id="zcodesuccess" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="zcodefail" style={{position:"relative",left:"93%",top:"3%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <CustomTextBox
                                     htFor="zip code" 
                                     style="col col-form-label"
                                     txtBoxLabel="zip code"
                                     txtBoxType="text"  
-                                    txtBoxID="zip code" 
+                                    txtBoxID="zipcode" 
                                     txtBoxPH="Enter The zip code"
                                     txtBoxValue={zipcode}                                         
                                     changeEvent={this.onChange}                                            
                                     txtBoxName="zipcode"
                                 />
                             
-                            {errors.address.length>0 && <span className="error">{errors.address}</span>}
+                            {/*{errors.address.length>0 && <span className="error">{errors.address}</span>}*/}
+                            <span style={{display:"none"}} className="error" id="adderror">Address is not Valid!</span>
+                            <i className="fa fa-check" id="addsuccess" style={{position:"relative",left:"93%",top:"5%", zIndex:"1", display:"none", color:"green"}}></i>
+                                <i className="fa fa-times" id="addfail" style={{position:"relative",left:"93%",top:"4%", zIndex:"1", display:"none", color:"red"}}></i>
                                 <Form.Group as={Row}>
                                     <Form.Label htmlFor="address" className="col col-form-label" required>Address</Form.Label>
                                     <Col>

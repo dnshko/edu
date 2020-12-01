@@ -18,7 +18,7 @@ let initialQuiz = {
             'showPager': true,
             'theme': 'none'
         },
-        questions: []
+        question_set: []
     },
     mode: 'quiz',
     pager: {
